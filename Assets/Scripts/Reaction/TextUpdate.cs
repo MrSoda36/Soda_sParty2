@@ -22,6 +22,8 @@ public class TextUpdate : MonoBehaviour
     };
 
     public bool isFinished = false;
+
+    public float[] playersTimes;
     public float timeJ1 {
         get; set;
     }
@@ -48,7 +50,8 @@ public class TextUpdate : MonoBehaviour
         menuButton.SetActive(false);
 
         background.GetComponent<Renderer>().material = black;
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 3);
+        Debug.Log("Select Game Text : " + rand);
         switch (rand) {
             case 0:
                 game_text.text = pepsiText[0];
@@ -69,35 +72,38 @@ public class TextUpdate : MonoBehaviour
         if (isFinished) {
             game_text.color = Color.black;
             if(timeJ1 != 0 && timeJ2 != 0 && timeJ3 != 0 && timeJ4 != 0) {
-                if (timeJ1 < timeJ2) {
-                    if (timeJ1 < timeJ3) {
-                        if (timeJ1 < timeJ4) {
-                            game_text.text = "Coca-Cola a gagné !";
-                        }
+                playersTimes = new float[] { timeJ1, timeJ2, timeJ3, timeJ4 };
+                float min = playersTimes[0];
+                foreach (var time in playersTimes)
+                {
+                    if(time < min) {
+                        min = time;
                     }
                 }
-                else if (timeJ2 < timeJ1) {
-                    if (timeJ2 < timeJ3) {
-                        if (timeJ2 < timeJ4) {
-                            game_text.text = "Pepsi a gagné !";
-                        }
-                    }
+
+                if (timeJ1 == min) {
+                    Debug.Log("Coca-Cola a gagné !");
+                    Debug.Log("Temps J1 : " + timeJ1);
+                    Debug.Log("Temps min : " + min);
+                    game_text.text = "Coca-Cola a gagné !";
                 }
-                else if (timeJ3 < timeJ1) {
-                    if (timeJ3 < timeJ2) {
-                        if (timeJ3 < timeJ4) {
-                            game_text.text = "Fanta a gagné !";
-                        }
-                    }
+                if (timeJ2 == min) {
+                    Debug.Log("Temps J2 : " + timeJ2);
+                    Debug.Log("Temps min : " + min);
+                    game_text.text = "Pepsi a gagné !";
                 }
-                else if (timeJ4 < timeJ1) {
-                    if (timeJ4 < timeJ2) {
-                        if (timeJ4 < timeJ3) {
-                            game_text.text = "Sprite a gagné !";
-                        }
-                    }
+                if (timeJ3 == min) {
+                    Debug.Log("Temps J3 : " + timeJ3);
+                    Debug.Log("Temps min : " + min);
+                    game_text.text = "Fanta a gagné !";
                 }
-                else {
+                if (timeJ4 == min) {
+                    Debug.Log("Temps J4 : " + timeJ4);
+                    Debug.Log("Temps min : " + min);
+                    game_text.text = "Sprite a gagné !";
+                }
+                if (timeJ1 != min && timeJ2 != min && timeJ3 != min && timeJ4 != min)
+                {
                     game_text.text = "Egalité !";
                 }
                 menuButton.SetActive(true);
@@ -138,19 +144,19 @@ public class TextUpdate : MonoBehaviour
     }
     IEnumerator TextUpdaterNumber(string[] tabText) {
                                         // 5
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
         game_text.text = "";
         yield return new WaitForSeconds(0.5f);
         game_text.text = tabText[1];    // 4
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
         game_text.text = "";
         yield return new WaitForSeconds(0.5f);
         game_text.text = tabText[2];    // 3
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
         game_text.text = "";
         yield return new WaitForSeconds(0.5f);
         game_text.text = tabText[3];    // 2
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
         game_text.text = "";
         yield return new WaitForSeconds(0.5f);
         game_text.text = tabText[4];    // 1
