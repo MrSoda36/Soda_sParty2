@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartDisplay : MonoBehaviour
+public class GameSetUp : MonoBehaviour
 {
     //Store the number of players reference
     [SerializeField] NumberOfPlayer _playerNb;
@@ -14,11 +14,14 @@ public class StartDisplay : MonoBehaviour
     [SerializeField] Camera _UiCamera;
     [SerializeField] Camera _NullCam;
 
+    //Store the players references
+    [SerializeField] List<GameObject> _players;
 
     private void Start()
     {
         _playerNb.OnNumberOfPlayersChanged += DisplayBottle;
         _playerNb.OnNumberOfPlayersChanged += DisplayCamera;
+        _playerNb.OnNumberOfPlayersChanged += ActivatePlayers;
     }
 
     void DisplayBottle(int NbPlayer)
@@ -55,11 +58,11 @@ public class StartDisplay : MonoBehaviour
         }
     }
 
-    void UpdateUI(int NbPlayer)
+    void ActivatePlayers(int NbPlayer)
     {
-        if (NbPlayer==2)
+        for (int i = 0; i < NbPlayer; i++)
         {
-
+            _players[i].SetActive(true);
         }
-    }
+    }   
 }
