@@ -82,24 +82,15 @@ public class TextUpdate : MonoBehaviour
                 }
 
                 if (timeJ1 == min) {
-                    Debug.Log("Coca-Cola a gagné !");
-                    Debug.Log("Temps J1 : " + timeJ1);
-                    Debug.Log("Temps min : " + min);
                     game_text.text = "Coca-Cola a gagné !";
                 }
                 if (timeJ2 == min) {
-                    Debug.Log("Temps J2 : " + timeJ2);
-                    Debug.Log("Temps min : " + min);
                     game_text.text = "Pepsi a gagné !";
                 }
                 if (timeJ3 == min) {
-                    Debug.Log("Temps J3 : " + timeJ3);
-                    Debug.Log("Temps min : " + min);
                     game_text.text = "Fanta a gagné !";
                 }
                 if (timeJ4 == min) {
-                    Debug.Log("Temps J4 : " + timeJ4);
-                    Debug.Log("Temps min : " + min);
                     game_text.text = "Sprite a gagné !";
                 }
                 if (timeJ1 != min && timeJ2 != min && timeJ3 != min && timeJ4 != min)
