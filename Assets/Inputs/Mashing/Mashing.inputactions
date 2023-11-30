@@ -1,5 +1,5 @@
 {
-    "name": "Soda_sParty2",
+    "name": "Mashing",
     "maps": [
         {
             "name": "UI",
@@ -518,11 +518,11 @@
             ]
         },
         {
-            "name": "J1",
+            "name": "P1",
             "id": "48754bfc-9734-457a-b0dd-0b35214e098b",
             "actions": [
                 {
-                    "name": "MashingJ1",
+                    "name": "MashingFirstPlayer",
                     "type": "Button",
                     "id": "aad472f9-447e-4785-b090-f4dd1d16cdb5",
                     "expectedControlType": "Button",
@@ -538,8 +538,8 @@
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ1",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MashingFirstPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -549,19 +549,19 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ1",
+                    "groups": "Gamepad",
+                    "action": "MashingFirstPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "J2",
+            "name": "P2",
             "id": "1cb09e0b-fc2c-4ea6-aa54-dac4c50440ac",
             "actions": [
                 {
-                    "name": "MashingJ2",
+                    "name": "MashingSecondPlayer",
                     "type": "Button",
                     "id": "ab49aad8-5207-4d08-a1bb-55b5ca278314",
                     "expectedControlType": "Button",
@@ -577,8 +577,8 @@
                     "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ2",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MashingSecondPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -588,19 +588,19 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ2",
+                    "groups": "Gamepad",
+                    "action": "MashingSecondPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "J3",
+            "name": "P3",
             "id": "aee4b21b-01cc-4e60-836f-60cd14c75357",
             "actions": [
                 {
-                    "name": "MashingJ3",
+                    "name": "MashingThirdPlayer",
                     "type": "Button",
                     "id": "dc60e43a-98c1-4eb8-8143-0fd2b3032cce",
                     "expectedControlType": "Button",
@@ -616,8 +616,8 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ3",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MashingThirdPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -627,19 +627,19 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ3",
+                    "groups": "Gamepad",
+                    "action": "MashingThirdPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "J4",
+            "name": "P4",
             "id": "bef9dfdb-987e-4e8b-9918-a485288242fb",
             "actions": [
                 {
-                    "name": "MashingJ4",
+                    "name": "MashingFourthPlayer",
                     "type": "Button",
                     "id": "8326e8c4-b086-408b-9791-1491a656bd7b",
                     "expectedControlType": "Button",
@@ -655,8 +655,8 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ4",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MashingFourthPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -666,8 +666,8 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "MashingJ4",
+                    "groups": "Gamepad",
+                    "action": "MashingFourthPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
