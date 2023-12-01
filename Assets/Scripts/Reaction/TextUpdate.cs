@@ -124,69 +124,63 @@ public class TextUpdate : MonoBehaviour
         if (nbPlayers == 2) {
             float min = playersTimes[0];
             foreach (var time in playersTimes) {
-                Debug.Log("Temps min - Init : " + min);
                 if (time < min) {
                     min = time;
                 }
-                Debug.Log("Temps min : " + min);
             }
             if (timeJ1 == min) {
-                game_text.text = "Coca-Cola a gagné !";
+                game_text.text = "Coca-Cola wins !";
             }
             if (timeJ2 == min) {
-                game_text.text = "Pepsi a gagné !";
+                game_text.text = "Pepsi wins !";
             }
             if (timeJ1 == timeJ2) {
-                game_text.text = "Egalité !";
+                game_text.text = "Draw !";
             }
         }
         if (nbPlayers == 3) {
             float min = playersTimes[0];
-            Debug.Log("Temps min - Init : " + min);
             foreach (var time in playersTimes) {
                 if (time < min) {
                     min = time;
                 }
             }
-            Debug.Log("Temps min : " + min);
 
             if (timeJ1 == min) {
-                game_text.text = "Coca-Cola a gagné !";
+                game_text.text = "Coca-Cola wins !";
             }
             if (timeJ2 == min) {
-                game_text.text = "Pepsi a gagné !";
+                game_text.text = "Pepsi wins !";
             }
             if (timeJ3 == min) {
-                game_text.text = "Fanta a gagné !";
+                game_text.text = "Fanta wins !";
             }
             if (timeJ1 == timeJ2 && timeJ1 == timeJ3) {
-                game_text.text = "Egalité !";
+                game_text.text = "Draw !";
             }
         }
         if (nbPlayers == 4) {
             float min = playersTimes[0];
-            Debug.Log("Temps min - Init : " + min);
             foreach (var time in playersTimes) {
                 if (time < min) {
                     min = time;
                 }
             }
-            Debug.Log("Temps min : " + min);
 
             if (timeJ1 == min) {
-                game_text.text = "Coca-Cola a gagné !";
+                game_text.text = "Coca-Cola wins !";
             }
             if (timeJ2 == min) {
-                game_text.text = "Pepsi a gagné !";
+                game_text.text = "Pepsi wins !";
             }
             if (timeJ3 == min) {
-                game_text.text = "Fanta a gagné !";
+                game_text.text = "Fanta wins !";
             }
             if (timeJ4 == min) {
-                game_text.text = "Sprite a gagné !";
+                game_text.text = "Sprite wins !";
             }
             if (timeJ1 == timeJ2 && timeJ1 == timeJ3 && timeJ1 == timeJ4) {
-                game_text.text = "Egalité !";
+                game_text.text = "Draw !";
             }
         }
     }
