@@ -17,6 +17,9 @@ public class GameSetUp : MonoBehaviour
     //Store the players references
     [SerializeField] List<GameObject> _players;
 
+    //Store the player input reference
+    [SerializeField] GameObject _playerInputs;
+
     private void Start()
     {
         _playerNb.OnNumberOfPlayersChanged += DisplayBottle;
@@ -60,6 +63,7 @@ public class GameSetUp : MonoBehaviour
 
     void ActivatePlayers(int NbPlayer)
     {
+        _playerInputs.SetActive(true);
         for (int i = 0; i < NbPlayer; i++)
         {
             _players[i].SetActive(true);
