@@ -23,7 +23,9 @@ public class TextUpdate : MonoBehaviour
 
     public bool isFinished = false;
 
-    public float[] playersTimes;
+    [SerializeField] NumberOfPlayer selectedPlayers;
+    [SerializeField] int nbPlayers;
+    [SerializeField] float[] playersTimes;
     public float timeJ1 {
         get; set;
     }
@@ -37,17 +39,23 @@ public class TextUpdate : MonoBehaviour
         get; set;
     }
 
-    public TextMeshProUGUI game_text;
-    public GameObject background;
-    public Material black;
-    public Material white;
+    [SerializeField] TextMeshProUGUI game_text;
+    [SerializeField] GameObject background;
+    [SerializeField] Material black;
+    [SerializeField] Material white;
 
-    public GameObject menuButton;
+    [SerializeField] GameObject menuButton;
+
+    private void Awake() {
+        selectedPlayers.OnNumberOfPlayersChanged += SelectPlayers;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         menuButton.SetActive(false);
+
+        playersTimes = new float[nbPlayers];
 
         background.GetComponent<Renderer>().material = black;
         int rand = Random.Range(0, 3);
@@ -68,38 +76,112 @@ public class TextUpdate : MonoBehaviour
         }
     }
 
+    void SelectPlayers(int nbPlayer) {
+        nbPlayers = nbPlayer;
+    }
+
     void Update() {
         if (isFinished) {
             game_text.color = Color.black;
-            if(timeJ1 != 0 && timeJ2 != 0 && timeJ3 != 0 && timeJ4 != 0) {
-                playersTimes = new float[] { timeJ1, timeJ2, timeJ3, timeJ4 };
-                float min = playersTimes[0];
-                foreach (var time in playersTimes)
-                {
-                    if(time < min) {
-                        min = time;
-                    }
-                }
 
-                if (timeJ1 == min) {
-                    game_text.text = "Coca-Cola a gagné !";
+            if(nbPlayers == 2) {
+                if (timeJ1 != 0 && timeJ2 != 0) {
+                    playersTimes[0] = timeJ1;
+                    playersTimes[1] = timeJ2;
+                    Debug.Log("Find Winner - 2 Players");
+                    FindWinner();
                 }
-                if (timeJ2 == min) {
-                    game_text.text = "Pepsi a gagné !";
+            }
+            if(nbPlayers == 3) {
+                if (timeJ1 != 0 && timeJ2 != 0 && timeJ3 != 0) {
+                    playersTimes[0] = timeJ1;
+                    playersTimes[1] = timeJ2;
+                    playersTimes[2] = timeJ3;
+                    Debug.Log("Find Winner - 3 Players");
+                    FindWinner();
                 }
-                if (timeJ3 == min) {
-                    game_text.text = "Fanta a gagné !";
+            }
+            if(nbPlayers == 4) {
+                if (timeJ1 != 0 && timeJ2 != 0 && timeJ3 != 0 && timeJ4 != 0) {
+                    playersTimes[0] = timeJ1;
+                    playersTimes[1] = timeJ2;
+                    playersTimes[2] = timeJ3;
+                    playersTimes[3] = timeJ4;
+                    Debug.Log("Find Winner - 4 Players");
+                    FindWinner();
                 }
-                if (timeJ4 == min) {
-                    game_text.text = "Sprite a gagné !";
-                }
-                if (timeJ1 != min && timeJ2 != min && timeJ3 != min && timeJ4 != min)
-                {
-                    game_text.text = "Egalité !";
-                }
-                menuButton.SetActive(true);
             }
             
+            
+
+            menuButton.SetActive(true);
+
+        }
+    }
+
+    void FindWinner() {
+
+        if (nbPlayers == 2) {
+            float min = playersTimes[0];
+            foreach (var time in playersTimes) {
+                if (time < min) {
+                    min = time;
+                }
+            }
+            if (timeJ1 == min) {
+                game_text.text = "Coca-Cola wins !";
+            }
+            if (timeJ2 == min) {
+                game_text.text = "Pepsi wins !";
+            }
+            if (timeJ1 == timeJ2) {
+                game_text.text = "Draw !";
+            }
+        }
+        if (nbPlayers == 3) {
+            float min = playersTimes[0];
+            foreach (var time in playersTimes) {
+                if (time < min) {
+                    min = time;
+                }
+            }
+
+            if (timeJ1 == min) {
+                game_text.text = "Coca-Cola wins !";
+            }
+            if (timeJ2 == min) {
+                game_text.text = "Pepsi wins !";
+            }
+            if (timeJ3 == min) {
+                game_text.text = "Fanta wins !";
+            }
+            if (timeJ1 == timeJ2 && timeJ1 == timeJ3) {
+                game_text.text = "Draw !";
+            }
+        }
+        if (nbPlayers == 4) {
+            float min = playersTimes[0];
+            foreach (var time in playersTimes) {
+                if (time < min) {
+                    min = time;
+                }
+            }
+
+            if (timeJ1 == min) {
+                game_text.text = "Coca-Cola wins !";
+            }
+            if (timeJ2 == min) {
+                game_text.text = "Pepsi wins !";
+            }
+            if (timeJ3 == min) {
+                game_text.text = "Fanta wins !";
+            }
+            if (timeJ4 == min) {
+                game_text.text = "Sprite wins !";
+            }
+            if (timeJ1 == timeJ2 && timeJ1 == timeJ3 && timeJ1 == timeJ4) {
+                game_text.text = "Draw !";
+            }
         }
     }
 
@@ -123,9 +205,9 @@ public class TextUpdate : MonoBehaviour
 
     IEnumerator TextUpdaterChucklenuts(string[] tabText) {
                                         // Think fast
-        yield return new WaitForSeconds(1.0f);
-        game_text.text = "";
         yield return new WaitForSeconds(0.5f);
+        game_text.text = "";
+        yield return new WaitForSeconds(0.25f);
         game_text.text = tabText[1];    // Chucklenuts
         yield return new WaitForSeconds(0.5f);
         background.GetComponent<Renderer>().material = white;
