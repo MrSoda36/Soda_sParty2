@@ -51,7 +51,7 @@ public class PlayerTextUpdate : MonoBehaviour
             p1BindingsAccessor = playerInput.actions["PlayerOne"].ChangeBinding(0).WithPath("<Keyboard>/" + letters[Random.Range(0, letters.Length)]);
             char p1LetterBindings = p1Bindings[0].path[p1Bindings[0].path.Length - 1];
 
-            playerText.text = "Press [" + p1LetterBindings + "]";
+            playerText.text = "Press [" + p1LetterBindings.ToString().ToUpper() + "]";
         }else if(playerNum == 2) {
 
             var p2Bindings = playerInput.actions["PlayerTwo"].bindings;
@@ -59,7 +59,7 @@ public class PlayerTextUpdate : MonoBehaviour
             p2BindingsAccessor = playerInput.actions["PlayerTwo"].ChangeBinding(0).WithPath("<Keyboard>/" + letters[Random.Range(0, letters.Length)]);
             char p2LetterBindings = p2Bindings[0].path[p2Bindings[0].path.Length - 1];
 
-            playerText.text = "Press [" + p2LetterBindings + "]";
+            playerText.text = "Press [" + p2LetterBindings.ToString().ToUpper() + "]";
         }else if(playerNum == 3) {
 
             var p3Bindings = playerInput.actions["PlayerThree"].bindings;
@@ -67,7 +67,7 @@ public class PlayerTextUpdate : MonoBehaviour
             p3BindingsAccessor = playerInput.actions["PlayerThree"].ChangeBinding(0).WithPath("<Keyboard>/" + letters[Random.Range(0, letters.Length)]);
             char p3LetterBindings = p3Bindings[0].path[p3Bindings[0].path.Length - 1];
 
-            playerText.text = "Press [" + p3LetterBindings + "]";
+            playerText.text = "Press [" + p3LetterBindings.ToString().ToUpper() + "]";
         }else if(playerNum == 4) {
 
             var p4Bindings = playerInput.actions["PlayerFour"].bindings;
@@ -75,7 +75,7 @@ public class PlayerTextUpdate : MonoBehaviour
             p4BindingsAccessor = playerInput.actions["PlayerFour"].ChangeBinding(0).WithPath("<Keyboard>/" + letters[Random.Range(0, letters.Length)]);
             char p4LetterBindings = p4Bindings[0].path[p4Bindings[0].path.Length - 1];
 
-            playerText.text = "Press [" + p4LetterBindings + "]";
+            playerText.text = "Press [" + p4LetterBindings.ToString().ToUpper() + "]";
         }
     }
 
