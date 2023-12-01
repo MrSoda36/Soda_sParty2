@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class ShakeByInputSystem : MonoBehaviour
 {
     //Set if the game is finished or not
-    bool End = false;
+    public bool End { get; private set; } = false;
 
     //Store the counter of each player
     int CocaCounter = 0;
@@ -19,8 +19,11 @@ public class ShakeByInputSystem : MonoBehaviour
     //Store the win count
     int WinCount;
 
-    //Store the boolean to know if the player can shake
-    bool CanShake = true;
+    //Store the boolean to know if the player can shake their bottle
+    bool CocaCanShake = true;
+    bool PepsiCanShake = true;
+    bool FantaCanShake = true;
+    bool SpriteCanShake = true;
 
     [Header("Bottles")]
     //Store the bottles references
@@ -36,6 +39,13 @@ public class ShakeByInputSystem : MonoBehaviour
     [SerializeField] UnityEngine.UI.Slider FantaSlider;
     [SerializeField] UnityEngine.UI.Slider SpriteSlider;
 
+    //Store the AudioSources Component on each bottle
+    AudioSource CocaAudioSource;
+    AudioSource PepsiAudioSource;
+    AudioSource FantaAudioSource;
+    AudioSource SpriteAudioSource;
+
+
     //Set the Event to call when a player reach the win count
     public event Action<GameObject> OnWinReached;
 
@@ -50,14 +60,21 @@ public class ShakeByInputSystem : MonoBehaviour
         PepsiSlider.maxValue = WinCount;
         FantaSlider.maxValue = WinCount;
         SpriteSlider.maxValue = WinCount;
+
+        //Get the AudioSources Component on each bottle
+        CocaAudioSource = CocaBottle.GetComponent<AudioSource>();
+        PepsiAudioSource = PepsiBottle.GetComponent<AudioSource>();
+        FantaAudioSource = FantaBottle.GetComponent<AudioSource>();
+        SpriteAudioSource = SpriteBottle.GetComponent<AudioSource>();
     }
     public void OnMashingFirstPlayer()
     {
-        Debug.Log("First Player");
         if (!End)
         {
+            Debug.Log("First Player");
+            CocaAudioSource.Play();
             CocaCounter++;
-            Shake(CocaBottle);
+            Shake(CocaBottle,CocaCanShake);
 
             if (CocaCounter >= WinCount)
             {
@@ -69,11 +86,12 @@ public class ShakeByInputSystem : MonoBehaviour
     }
     public void OnMashingSecondPlayer()
     {
-        Debug.Log("Second Player");
         if (!End)
         {
+            Debug.Log("Second Player");
+            PepsiAudioSource.Play();
             PepsiCounter++;
-            Shake(PepsiBottle);
+            Shake(PepsiBottle, PepsiCanShake);
             if (PepsiCounter >= WinCount)
             {
                 End = true;
@@ -84,11 +102,12 @@ public class ShakeByInputSystem : MonoBehaviour
     }
     public void OnMashingThirdPlayer()
     {
-        Debug.Log("Third Player");
         if (!End)
         {
+            Debug.Log("Third Player");
+            FantaAudioSource.Play();
             FantaCounter++;
-            Shake(FantaBottle);
+            Shake(FantaBottle, FantaCanShake);
             if (FantaCounter >= WinCount)
             {
                 End = true;
@@ -99,11 +118,12 @@ public class ShakeByInputSystem : MonoBehaviour
     }
     public void OnMashingFourthPlayer()
     {
-        Debug.Log("Fourth Player");
         if (!End)
         {
+            Debug.Log("Fourth Player");
+            SpriteAudioSource.Play();
             SpriteCounter++;
-            Shake(SpriteBottle);
+            Shake(SpriteBottle, SpriteCanShake);
             if (SpriteCounter >= WinCount)
             {
                 End = true;
@@ -113,19 +133,19 @@ public class ShakeByInputSystem : MonoBehaviour
         }
     }
 
-    void Shake(GameObject Bottle)
+    void Shake(GameObject Bottle, bool CanShake)
     {
         if (CanShake)
         {
             Bottle.transform.DOShakeScale(0.1f, 0.01f);
             Bottle.transform.DOShakeRotation(0.1f, 45);
             CanShake = false;
-            StartCoroutine(WaitForReShake());
+            StartCoroutine(WaitForReShake(CanShake));
         }
     }
 
 
-    IEnumerator WaitForReShake()
+    IEnumerator WaitForReShake(bool CanShake)
     {
         yield return new WaitForSeconds(0.1f);
         CanShake = true;

@@ -21,23 +21,31 @@ public class InputManager : MonoBehaviour
 
         }
     }
-    public void FirstPlayerInput()
+    public void FirstPlayerInput(InputAction.CallbackContext ctx)
     {
+        if (!ctx.started) return;
+
         ShakeScript.OnMashingFirstPlayer();
     }
-    public void SecondPlayerInput()
+    public void SecondPlayerInput(InputAction.CallbackContext ctx)
     {
+        if (!ctx.started) return;
+
         ShakeScript.OnMashingSecondPlayer();
     }
-    public void ThirdPlayerInput()
+    public void ThirdPlayerInput(InputAction.CallbackContext ctx)
     {
+        if (!ctx.started) return;
+
         if (players[2].activeSelf)
         {
             ShakeScript.OnMashingThirdPlayer();
         }
     }
-    public void FourthPlayerInput()
+    public void FourthPlayerInput(InputAction.CallbackContext ctx)
     {
+        if (!ctx.started) return;
+
         if (players[3].activeSelf)
         {
             ShakeScript.OnMashingFourthPlayer();
