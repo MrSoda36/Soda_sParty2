@@ -34,7 +34,6 @@ public class PlayerTextUpdate : MonoBehaviour
                 if (!isDone) {
                     playerText.text = "Fait !";
                     isDone = true;
-                    Debug.Log("Temps J1 : " + reactTime);
                     playerText.text = reactTime.ToString("0.###");
                     textUpdate.timeJ1 = reactTime;
                 }
@@ -44,7 +43,6 @@ public class PlayerTextUpdate : MonoBehaviour
                 if (!isDone) {
                     playerText.text = "Fait !";
                     isDone = true;
-                    Debug.Log("Temps J2 : " + reactTime);
                     playerText.text = reactTime.ToString("0.###");
                     textUpdate.timeJ2 = reactTime;
                 }
@@ -53,7 +51,6 @@ public class PlayerTextUpdate : MonoBehaviour
                 if (!isDone) {
                     playerText.text = "Fait !";
                     isDone = true;
-                    Debug.Log("Temps J3 : " + reactTime);
                     playerText.text = reactTime.ToString("0.###");
                     textUpdate.timeJ3 = reactTime;
                 }
@@ -62,7 +59,6 @@ public class PlayerTextUpdate : MonoBehaviour
                 if (!isDone) {
                     playerText.text = "Fait !";
                     isDone = true;
-                    Debug.Log("Temps J4 : " + reactTime);
                     playerText.text = reactTime.ToString("0.###");
                     textUpdate.timeJ4 = reactTime;
                 }
