@@ -374,17 +374,6 @@
                 },
                 {
                     "name": "",
-                    "id": "82627dcc-3b13-4ba9-841d-e4b746d6553e",
-                    "path": "*/{Cancel}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c52c8e0b-8179-41d3-b8a1-d149033bbe86",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -514,17 +503,55 @@
                     "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82627dcc-3b13-4ba9-841d-e4b746d6553e",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "P1",
-            "id": "48754bfc-9734-457a-b0dd-0b35214e098b",
+            "name": "Player",
+            "id": "4343e264-d3f5-4950-84a6-076a0016ccb7",
             "actions": [
                 {
-                    "name": "MashingFirstPlayer",
+                    "name": "FirstPlayer",
                     "type": "Button",
-                    "id": "aad472f9-447e-4785-b090-f4dd1d16cdb5",
+                    "id": "2791c788-7102-4518-a2a5-d88f1339f745",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SecondPlayer",
+                    "type": "Button",
+                    "id": "2c1308e4-5833-4d48-915c-c9fa2a317c86",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThirdPlayer",
+                    "type": "Button",
+                    "id": "2ebf7e85-cea3-40f7-8d6f-6b7e922dde22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FourthPlayer",
+                    "type": "Button",
+                    "id": "de67ac62-8eee-4a68-9460-03185990ce37",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -534,140 +561,89 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "15838298-348b-4271-97fe-bc47491e7117",
+                    "id": "c08b3480-bb0b-4a54-87df-8732154288c0",
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MashingFirstPlayer",
+                    "action": "FirstPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "afebf343-02a8-4ae5-a090-f4d167a2f04c",
+                    "id": "c401b39f-2174-403f-9a2b-811be60e4517",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "MashingFirstPlayer",
+                    "action": "FirstPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "P2",
-            "id": "1cb09e0b-fc2c-4ea6-aa54-dac4c50440ac",
-            "actions": [
-                {
-                    "name": "MashingSecondPlayer",
-                    "type": "Button",
-                    "id": "ab49aad8-5207-4d08-a1bb-55b5ca278314",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "47277566-f846-4a52-b63d-07a39bdc8a91",
+                    "id": "8f7fd12b-f0f4-4b09-9407-63c88567ba92",
                     "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MashingSecondPlayer",
+                    "action": "SecondPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f8741fd0-8a08-4b94-897a-ce354daa7a79",
+                    "id": "8ea638b1-a0bc-48a6-8c57-525bb775ec33",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "MashingSecondPlayer",
+                    "action": "SecondPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "P3",
-            "id": "aee4b21b-01cc-4e60-836f-60cd14c75357",
-            "actions": [
-                {
-                    "name": "MashingThirdPlayer",
-                    "type": "Button",
-                    "id": "dc60e43a-98c1-4eb8-8143-0fd2b3032cce",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "9087e849-ea31-43ac-9b77-cda398d9fff9",
+                    "id": "35d76731-dfef-430f-9219-97ca3e3951b4",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MashingThirdPlayer",
+                    "action": "ThirdPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7c98f428-3ac5-4957-bbc0-19c2198c955b",
+                    "id": "7cb6c1c2-5fa5-4da7-868d-4bdb879653c5",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "MashingThirdPlayer",
+                    "action": "ThirdPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "P4",
-            "id": "bef9dfdb-987e-4e8b-9918-a485288242fb",
-            "actions": [
-                {
-                    "name": "MashingFourthPlayer",
-                    "type": "Button",
-                    "id": "8326e8c4-b086-408b-9791-1491a656bd7b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "7d6705d1-e6de-4ea8-a00c-a375dfe854b4",
+                    "id": "d12b4f2b-17bd-487a-8f94-d3d84803b908",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "MashingFourthPlayer",
+                    "action": "FourthPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a6e19124-3bd9-4d0c-aa02-67473b22a686",
+                    "id": "4834c647-59bc-47ee-bcb3-58e11c303459",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "MashingFourthPlayer",
+                    "action": "FourthPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
