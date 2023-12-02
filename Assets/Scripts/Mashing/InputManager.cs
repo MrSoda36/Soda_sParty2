@@ -11,16 +11,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] ShakeByInputSystem ShakeScript;
 
 
-    public Gamepad[] gamepadCount;
-    private void Start()
-    {
-        gamepadCount = InputSystem.devices.OfType<Gamepad>().ToArray();
-        foreach (var item in gamepadCount)
-        {
-            Debug.Log(item.name);
-
-        }
-    }
     public void FirstPlayerInput(InputAction.CallbackContext ctx)
     {
         if (!ctx.started) return;
