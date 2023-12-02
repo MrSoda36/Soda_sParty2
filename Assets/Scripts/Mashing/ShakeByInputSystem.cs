@@ -20,10 +20,10 @@ public class ShakeByInputSystem : MonoBehaviour
     int WinCount;
 
     //Store the boolean to know if the player can shake their bottle
-    bool CocaCanShake = true;
-    bool PepsiCanShake = true;
-    bool FantaCanShake = true;
-    bool SpriteCanShake = true;
+    Transform InitialCocaTransform;
+    Transform InitialPepsiTransform;
+    Transform InitialFantaTransform;
+    Transform InitialSpriteTransform;
 
     [Header("Bottles")]
     //Store the bottles references
@@ -66,15 +66,20 @@ public class ShakeByInputSystem : MonoBehaviour
         PepsiAudioSource = PepsiBottle.GetComponent<AudioSource>();
         FantaAudioSource = FantaBottle.GetComponent<AudioSource>();
         SpriteAudioSource = SpriteBottle.GetComponent<AudioSource>();
+
+        //Get the initial transform of each bottle
+        InitialCocaTransform = CocaBottle.transform;
+        InitialPepsiTransform = PepsiBottle.transform;
+        InitialFantaTransform = FantaBottle.transform;
+        InitialSpriteTransform = SpriteBottle.transform;
     }
     public void OnMashingFirstPlayer()
     {
         if (!End)
         {
-            Debug.Log("First Player");
             CocaAudioSource.Play();
             CocaCounter++;
-            Shake(CocaBottle,CocaCanShake);
+            Shake(CocaBottle);
 
             if (CocaCounter >= WinCount)
             {
@@ -91,7 +96,7 @@ public class ShakeByInputSystem : MonoBehaviour
             Debug.Log("Second Player");
             PepsiAudioSource.Play();
             PepsiCounter++;
-            Shake(PepsiBottle, PepsiCanShake);
+            Shake(PepsiBottle);
             if (PepsiCounter >= WinCount)
             {
                 End = true;
@@ -107,7 +112,7 @@ public class ShakeByInputSystem : MonoBehaviour
             Debug.Log("Third Player");
             FantaAudioSource.Play();
             FantaCounter++;
-            Shake(FantaBottle, FantaCanShake);
+            Shake(FantaBottle);
             if (FantaCounter >= WinCount)
             {
                 End = true;
@@ -123,7 +128,7 @@ public class ShakeByInputSystem : MonoBehaviour
             Debug.Log("Fourth Player");
             SpriteAudioSource.Play();
             SpriteCounter++;
-            Shake(SpriteBottle, SpriteCanShake);
+            Shake(SpriteBottle);
             if (SpriteCounter >= WinCount)
             {
                 End = true;
@@ -133,22 +138,9 @@ public class ShakeByInputSystem : MonoBehaviour
         }
     }
 
-    void Shake(GameObject Bottle, bool CanShake)
+    void Shake(GameObject Bottle)
     {
-        if (CanShake)
-        {
             Bottle.transform.DOShakeScale(0.1f, 0.01f);
             Bottle.transform.DOShakeRotation(0.1f, 45);
-            CanShake = false;
-            StartCoroutine(WaitForReShake(CanShake));
-        }
     }
-
-
-    IEnumerator WaitForReShake(bool CanShake)
-    {
-        yield return new WaitForSeconds(0.1f);
-        CanShake = true;
-    }
-
 }
