@@ -518,7 +518,7 @@
             ]
         },
         {
-            "name": "Player",
+            "name": "PlayerKeyboard",
             "id": "4343e264-d3f5-4950-84a6-076a0016ccb7",
             "actions": [
                 {
@@ -572,33 +572,11 @@
                 },
                 {
                     "name": "",
-                    "id": "c401b39f-2174-403f-9a2b-811be60e4517",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "FirstPlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8f7fd12b-f0f4-4b09-9407-63c88567ba92",
                     "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SecondPlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8ea638b1-a0bc-48a6-8c57-525bb775ec33",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "SecondPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -616,17 +594,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7cb6c1c2-5fa5-4da7-868d-4bdb879653c5",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "ThirdPlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d12b4f2b-17bd-487a-8f94-d3d84803b908",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -635,15 +602,116 @@
                     "action": "FourthPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "PlayerOneGamepad",
+            "id": "21bf7552-f18e-404a-82cc-c94f6d830d11",
+            "actions": [
+                {
+                    "name": "FirstPlayerGamepad",
+                    "type": "Button",
+                    "id": "3ece0ee7-41d7-4746-a476-59d5d1bb76ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "4834c647-59bc-47ee-bcb3-58e11c303459",
+                    "id": "99de7218-50fc-47bb-9afc-4d5a9eda2065",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "FourthPlayer",
+                    "groups": "",
+                    "action": "FirstPlayerGamepad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerTwoGamepad",
+            "id": "e86de997-b31f-432b-a0b1-d8d7139fb036",
+            "actions": [
+                {
+                    "name": "SecondPlayerGamepad",
+                    "type": "Button",
+                    "id": "20751156-d3bd-47d3-8320-8be287861187",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "641ab67c-213b-44a7-ab19-9bb8a7158e63",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondPlayerGamepad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerThreeGamepad",
+            "id": "95286a27-75aa-44d3-9912-bd60b73238de",
+            "actions": [
+                {
+                    "name": "ThirdPlayerGamepad",
+                    "type": "Button",
+                    "id": "393670c5-a831-46fd-9a47-d307406998a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8e6791d2-e3b0-4e8b-b6a7-1f07f96b1108",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThirdPlayerGamepad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerFourGamepad",
+            "id": "543c02de-a5cb-4629-a029-2757af47cffb",
+            "actions": [
+                {
+                    "name": "FourthPlayerGamepad",
+                    "type": "Button",
+                    "id": "81724af2-d002-4ed1-9bd1-192dbc9770be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dd23f079-20ad-40c2-a4d2-c2360b20d819",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FourthPlayerGamepad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
