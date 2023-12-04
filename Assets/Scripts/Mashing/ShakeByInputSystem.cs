@@ -1,7 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
-using System.Security.Cryptography;
 using System;
 using Random = UnityEngine.Random;
 
@@ -19,12 +17,6 @@ public class ShakeByInputSystem : MonoBehaviour
     //Store the win count
     int WinCount;
 
-    //Store the boolean to know if the player can shake their bottle
-    Transform InitialCocaTransform;
-    Transform InitialPepsiTransform;
-    Transform InitialFantaTransform;
-    Transform InitialSpriteTransform;
-
     [Header("Bottles")]
     //Store the bottles references
     [SerializeField] GameObject CocaBottle;
@@ -39,6 +31,7 @@ public class ShakeByInputSystem : MonoBehaviour
     [SerializeField] UnityEngine.UI.Slider FantaSlider;
     [SerializeField] UnityEngine.UI.Slider SpriteSlider;
 
+    [Header("AudioSources")]
     //Store the AudioSources Component on each bottle
     AudioSource CocaAudioSource;
     AudioSource PepsiAudioSource;
@@ -67,11 +60,6 @@ public class ShakeByInputSystem : MonoBehaviour
         FantaAudioSource = FantaBottle.GetComponent<AudioSource>();
         SpriteAudioSource = SpriteBottle.GetComponent<AudioSource>();
 
-        //Get the initial transform of each bottle
-        InitialCocaTransform = CocaBottle.transform;
-        InitialPepsiTransform = PepsiBottle.transform;
-        InitialFantaTransform = FantaBottle.transform;
-        InitialSpriteTransform = SpriteBottle.transform;
     }
     public void OnMashingFirstPlayer()
     {
@@ -93,7 +81,6 @@ public class ShakeByInputSystem : MonoBehaviour
     {
         if (!End)
         {
-            Debug.Log("Second Player");
             PepsiAudioSource.Play();
             PepsiCounter++;
             Shake(PepsiBottle);
@@ -109,7 +96,6 @@ public class ShakeByInputSystem : MonoBehaviour
     {
         if (!End)
         {
-            Debug.Log("Third Player");
             FantaAudioSource.Play();
             FantaCounter++;
             Shake(FantaBottle);
@@ -125,7 +111,6 @@ public class ShakeByInputSystem : MonoBehaviour
     {
         if (!End)
         {
-            Debug.Log("Fourth Player");
             SpriteAudioSource.Play();
             SpriteCounter++;
             Shake(SpriteBottle);
@@ -140,7 +125,10 @@ public class ShakeByInputSystem : MonoBehaviour
 
     void Shake(GameObject Bottle)
     {
+        if (Bottle.transform != null)
+        {
             Bottle.transform.DOShakeScale(0.1f, 0.01f);
             Bottle.transform.DOShakeRotation(0.1f, 45);
+        }
     }
 }
