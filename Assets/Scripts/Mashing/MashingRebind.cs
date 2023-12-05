@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +8,7 @@ public class MashingRebind : MonoBehaviour
 
 
     [SerializeField] private GameObject UIRebind; //The UI that will be displayed when the player will rebind his keys
+
     [Header("Input Reference")]
     public InputActionReference FirstPlayerKeyboard = null;
     public InputActionReference SecondPlayerKeyboard = null;
@@ -17,6 +16,7 @@ public class MashingRebind : MonoBehaviour
     public InputActionReference FourthPlayerKeyboard = null;
 
 
+    private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
     event Action OnRebind;
 
@@ -25,24 +25,25 @@ public class MashingRebind : MonoBehaviour
         OnRebind += DisplayStartRebind;
     }
 
-    public void FirstPlayerRebind()
+    public void RebindKeyboard(InputActionReference _ref)
     {
+        InputAction _action = _ref.action;
         OnRebind?.Invoke();
         _playerInput.gameObject.SetActive(true);
-        FirstPlayerKeyboard.action.PerformInteractiveRebinding()
+        rebindingOperation = _ref.action.PerformInteractiveRebinding(0)
             .WithControlsExcluding("Mouse")
             .WithControlsExcluding("Gamepad")
             .WithControlsExcluding("Touchpad")
             .OnMatchWaitForAnother(0.1f)
-            .OnComplete(operation => RebindComplete(FirstPlayerKeyboard))
+            .OnComplete(operation => RebindComplete(FirstPlayerKeyboard.action))
             .Start();
     }
 
-    void RebindComplete(InputActionReference _ref)
+    void RebindComplete(InputAction _action)
     {
-        _playerInput.SwitchCurrentActionMap("PlayerKeyboard");
+        rebindingOperation.Dispose();
         _playerInput.gameObject.SetActive(false);
-        Debug.Log(InputControlPath.ToHumanReadableString(_ref.action.bindings[0].effectivePath,InputControlPath.HumanReadableStringOptions.OmitDevice));
+        Debug.Log(InputControlPath.ToHumanReadableString(_action.bindings[0].effectivePath,InputControlPath.HumanReadableStringOptions.OmitDevice));
         UIRebind.SetActive(false);
     }
 

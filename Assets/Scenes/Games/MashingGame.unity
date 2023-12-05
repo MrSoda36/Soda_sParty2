@@ -4085,6 +4085,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 722176373}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: SwitchCurrentActionMap
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlayerKeyboard
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &652480655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4478,7 +4490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &722176372
 Transform:
   m_ObjectHideFlags: 0
@@ -4649,7 +4661,7 @@ MonoBehaviour:
     m_ActionName: PlayerFourGamepad/FourthPlayer[/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerKeyboard
+  m_DefaultActionMap: Rebind
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &723576223
@@ -4772,7 +4784,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 723576225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 479679427}
+        m_TargetAssemblyTypeName: MashingRebind, Assembly-CSharp
+        m_MethodName: RebindKeyboard
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: -8659699704375497502, guid: ad0a98fd4feb0354d9d86c1a8ca19944, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.InputActionReference,
+            Unity.InputSystem
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &761119741
 GameObject:
   m_ObjectHideFlags: 0
@@ -5612,7 +5637,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 850848345}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 479679427}
+        m_TargetAssemblyTypeName: MashingRebind, Assembly-CSharp
+        m_MethodName: RebindKeyboard
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4962594943345866135, guid: ad0a98fd4feb0354d9d86c1a8ca19944, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.InputActionReference,
+            Unity.InputSystem
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &850848345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8155,7 +8193,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1270195040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 479679427}
+        m_TargetAssemblyTypeName: MashingRebind, Assembly-CSharp
+        m_MethodName: RebindKeyboard
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3352507224696170561, guid: ad0a98fd4feb0354d9d86c1a8ca19944, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.InputActionReference,
+            Unity.InputSystem
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1270195040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10682,6 +10733,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 722176373}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: SwitchCurrentActionMap
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlayerKeyboard
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1642186879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10923,7 +10986,6 @@ MonoBehaviour:
   FantaBindingText: {fileID: 468631371}
   SpriteBindingText: {fileID: 391961577}
   _inputManager: {fileID: 814449247}
-  _mashingRebind: {fileID: 0}
 --- !u!114 &1702520193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11538,11 +11600,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 479679427}
         m_TargetAssemblyTypeName: MashingRebind, Assembly-CSharp
-        m_MethodName: FirstPlayerRebind
-        m_Mode: 1
+        m_MethodName: RebindKeyboard
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: -2486707417024408299, guid: ad0a98fd4feb0354d9d86c1a8ca19944, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.InputActionReference,
+            Unity.InputSystem
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12758,6 +12821,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 722176373}
+        m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+        m_MethodName: SwitchCurrentActionMap
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlayerKeyboard
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2112240920
