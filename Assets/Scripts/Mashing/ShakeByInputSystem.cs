@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class ShakeByInputSystem : MonoBehaviour
 {
-    //Set if the game is finished or not
+    //Set if the game is _finished or not
     public bool End { get; private set; } = false;
 
     //Store the counter of each player
@@ -14,6 +14,13 @@ public class ShakeByInputSystem : MonoBehaviour
     int PepsiCounter = 0;
     int FantaCounter = 0;
     int SpriteCounter = 0;
+
+    //Store if the timer is started or not
+    bool CocaStarted = false;
+    bool PepsiStarted = false;
+    bool FantaStarted = false;
+    bool SpriteStarted = false;
+
 
     //Store the win count
     int WinCount;
@@ -47,6 +54,7 @@ public class ShakeByInputSystem : MonoBehaviour
     //Set the Event to call when a player reach the win count
     public event Action<GameObject> OnWinReached;
 
+    public event Action<string> OnStart;
 
     private void Start()
     {
@@ -70,6 +78,30 @@ public class ShakeByInputSystem : MonoBehaviour
         FantaAudioSource = FantaBottle.GetComponent<AudioSource>();
         SpriteAudioSource = SpriteBottle.GetComponent<AudioSource>();
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (CocaCounter == 1 && !CocaStarted)
+        {
+            OnStart?.Invoke("Coca");
+            CocaStarted = true;
+        }
+        if (PepsiCounter == 1 && !PepsiStarted)
+        {
+            OnStart?.Invoke("Pepsi");
+            PepsiStarted = true;
+        }
+        if (FantaCounter == 1 && !FantaStarted)
+        {
+            OnStart?.Invoke("Fanta");
+            FantaStarted = true;
+        }
+        if (SpriteCounter == 1 && !SpriteStarted)
+        {
+            OnStart?.Invoke("Sprite");
+            SpriteStarted = true;
+        }
     }
     public void OnMashingFirstPlayer()
     {

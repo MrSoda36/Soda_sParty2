@@ -11,7 +11,7 @@ public class WinDisplay : MonoBehaviour
     [SerializeField]Image BackToMenuButtonImage;
     [SerializeField]TMP_Text winText;
 
-    //Store the shake script to know when the game is finished
+    //Store the shake script to know when the game is _finished
     [SerializeField]ShakeByInputSystem ShakeScript;
 
     //Store the background image for the win text
