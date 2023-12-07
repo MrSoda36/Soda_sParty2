@@ -8235,7 +8235,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The rules for the game, Memory
+  m_text: The classic memory game, but with only 1 button. Time your press to flip
+    the cards you want and make pairs. Failing to make a pair changes to the next
+    player. Remember all the images to go multiples times in a row and get the highest
+    score.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
