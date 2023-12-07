@@ -626,7 +626,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "FirstPlayerGamepad",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -654,7 +654,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "SecondPlayerGamepad",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -682,7 +682,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "ThirdPlayerGamepad",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -710,7 +710,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "FourthPlayerGamepad",
                     "isComposite": false,
                     "isPartOfComposite": false

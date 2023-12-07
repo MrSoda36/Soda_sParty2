@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.InputSystem;
 
 public class ShakeByInputSystem : MonoBehaviour
 {
@@ -38,6 +39,10 @@ public class ShakeByInputSystem : MonoBehaviour
     AudioSource FantaAudioSource;
     AudioSource SpriteAudioSource;
 
+    [Header("GameSetUp")]
+    //Store the gameSetUp reference to get the gamepad player
+    [SerializeField] GameSetUp _gameSetUp;
+
 
     //Set the Event to call when a player reach the win count
     public event Action<GameObject> OnWinReached;
@@ -45,6 +50,11 @@ public class ShakeByInputSystem : MonoBehaviour
 
     private void Start()
     {
+        //Stop all the Tweens
+        OnWinReached += Finish;
+
+
+
         //Set the win count
         WinCount = Random.Range(80, 100);
 
@@ -125,10 +135,25 @@ public class ShakeByInputSystem : MonoBehaviour
 
     void Shake(GameObject Bottle)
     {
-        if (Bottle.transform != null)
+        if (Bottle.transform != null && !End)
         {
             Bottle.transform.DOShakeScale(0.1f, 0.01f);
             Bottle.transform.DOShakeRotation(0.1f, 45);
+        }
+    }
+
+    private void Finish(GameObject Winner)
+    {
+        foreach (GameObject player in _gameSetUp._gamepadPlayers)
+        {
+            if (player.activeSelf == true)
+            {
+                player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Rebind");
+            }
+            else
+            {
+                break;
+            }
         }
     }
 }

@@ -26,8 +26,6 @@ public class UiDisplay : MonoBehaviour
     [Header("Input Manager")]
     [SerializeField] InputManager _inputManager;
 
-    //[Header("Input Reference")]
-    //[SerializeField] private MashingRebind _mashingRebind = null;
 
     private void Start()
     {

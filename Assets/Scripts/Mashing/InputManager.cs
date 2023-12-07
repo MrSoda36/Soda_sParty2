@@ -11,14 +11,19 @@ public class InputManager : MonoBehaviour
     //Store the ShakeByInputSystem references
     [SerializeField] ShakeByInputSystem ShakeScript;
 
+
     //Store the Gamepad count
-    int GamepadCount = 0;
+    public int GamepadCount { get; private set; } = 0;
 
     public event Action<int> OnGamepadConnected;
     private void Start()
     {
         GamepadCount = InputSystem.devices.OfType<Gamepad>().Count();
         Debug.Log("GamepadCount: " + GamepadCount);
+        if (GamepadCount > 0)
+        {
+            OnGamepadConnected?.Invoke(GamepadCount);
+        }
     }
 
     private void FixedUpdate()
