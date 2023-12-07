@@ -34,7 +34,7 @@ public class MashingRebind : MonoBehaviour
             .WithControlsExcluding("Gamepad")
             .WithControlsExcluding("Touchpad")
             .OnMatchWaitForAnother(0.1f)
-            .OnComplete(operation => RebindComplete(_ref.action))
+            .OnComplete(operation => RebindComplete(_action))
             .Start();
     }
 
