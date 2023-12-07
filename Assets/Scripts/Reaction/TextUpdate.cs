@@ -120,9 +120,8 @@ public class TextUpdate : MonoBehaviour
     }
 
     void FindWinner() {
-
+        float min = playersTimes[0];
         if (nbPlayers == 2) {
-            float min = playersTimes[0];
             foreach (var time in playersTimes) {
                 if (time < min) {
                     min = time;
@@ -139,7 +138,6 @@ public class TextUpdate : MonoBehaviour
             }
         }
         if (nbPlayers == 3) {
-            float min = playersTimes[0];
             foreach (var time in playersTimes) {
                 if (time < min) {
                     min = time;
@@ -160,7 +158,6 @@ public class TextUpdate : MonoBehaviour
             }
         }
         if (nbPlayers == 4) {
-            float min = playersTimes[0];
             foreach (var time in playersTimes) {
                 if (time < min) {
                     min = time;
@@ -182,6 +179,13 @@ public class TextUpdate : MonoBehaviour
             if (timeJ1 == timeJ2 && timeJ1 == timeJ3 && timeJ1 == timeJ4) {
                 game_text.text = "Draw !";
             }
+        }
+
+        if(Leaderboards.instance != null) {
+            if(Leaderboards.instance.ReactionLoadScore() == 0) {
+                Leaderboards.instance.ReactionSaveScore(100000);
+            }
+            Leaderboards.instance.ReactionSaveScore(Mathf.Min(Leaderboards.instance.ReactionLoadScore(), min));
         }
     }
 
