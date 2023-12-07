@@ -51,8 +51,6 @@ public class PlayerTextUpdate : MonoBehaviour
             p1BindingsAccessor = playerInput.actions["PlayerOne"].ChangeBinding(0).WithPath("<Keyboard>/" + letters[Random.Range(0, letters.Length)]);
             char p1LetterBindings = p1Bindings[0].path[p1Bindings[0].path.Length - 1];
 
-            Debug.Log(Keyboard.current.zKey.displayName);
-
             playerText.text = "Press [" + p1LetterBindings.ToString().ToUpper() + "]";
         }else if(playerNum == 2) {
 
