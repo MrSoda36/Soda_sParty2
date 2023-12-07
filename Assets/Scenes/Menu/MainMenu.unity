@@ -5288,7 +5288,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: In Reaction Time, you have to press your key when the screen goes to white,
-    but be aware, the timing AND your key is random.
+    but be aware, the timing AND your key is random. Also, the keys is for a QWERTY
+    Keyboard.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}

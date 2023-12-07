@@ -10,14 +10,14 @@ public class UpdateLeaderboards : MonoBehaviour
     public TMP_Text memoryScoreText;
 
     public void UpdateMashingScore() {
-        mashingScoreText.text = Leaderboards.instance.MashingLoadScore().ToString();
+        mashingScoreText.text = "Best score of all time : \n" + Leaderboards.instance.MashingLoadScore().ToString("0.###");
     }
 
     public void UpdateReactionScore() {
-        reactionScoreText.text = Leaderboards.instance.ReactionLoadScore().ToString();
+        reactionScoreText.text = "Best score of all time : \n" + Leaderboards.instance.ReactionLoadScore().ToString("0.###");
     }
 
     public void UpdateMemoryScore() {
-        memoryScoreText.text = Leaderboards.instance.MemoryLoadScore().ToString();
+        memoryScoreText.text = "Best score of all time : \n" + Leaderboards.instance.MemoryLoadScore().ToString();
     }
 }
