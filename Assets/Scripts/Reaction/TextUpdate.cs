@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TextUpdate : MonoBehaviour
 {
@@ -185,6 +186,7 @@ public class TextUpdate : MonoBehaviour
 
         menuButton.SetActive(true);
         restartButton.SetActive(true);
+        restartButton.GetComponent<Button>().Select();
     }
 
     // Update the text on the screen with the "Pepsi Bottle meme" text
