@@ -174,6 +174,7 @@ public class ShakeByInputSystem : MonoBehaviour
         }
     }
 
+    //The game is finished, we switch the action map of the players to the Rebind one
     private void Finish(GameObject Winner)
     {
         foreach (GameObject player in _gameSetUp._gamepadPlayers)
