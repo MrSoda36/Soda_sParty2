@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class MashingScore : MonoBehaviour
     bool _spriteStarted = false;
 
     //Sets the timer for each player (0=coca / 1=pepsi / 2=fanta / 3=sprite)
-    float[] _timers = new float[4];
+    [SerializeField] float[] _timers = new float[4];
 
     bool _finished = false;
 
@@ -45,30 +46,32 @@ public class MashingScore : MonoBehaviour
 
     void OnEnd(GameObject _go)
     {
+        _finished = true;
+        Debug.Log(_timers.Min());
         float highestScore = Leaderboards.instance.MashingLoadScore();
 
         switch (_go.name)
         {
             case "Coca":
-                if (_timers[0] < highestScore)
+                if (_timers[0] < highestScore || highestScore == 0)
                 {
                     Leaderboards.instance.MashingSaveScore(_timers[0]);
                 }
                 break;
             case "Pepsi":
-                if (_timers[1] < highestScore)
+                if (_timers[1] < highestScore || highestScore == 0)
                 {
                     Leaderboards.instance.MashingSaveScore(_timers[1]);
                 }
                 break;
             case "Fanta":
-                if (_timers[2] < highestScore)
+                if (_timers[2] < highestScore || highestScore == 0)
                 {
                     Leaderboards.instance.MashingSaveScore(_timers[2]);
                 }
                 break;
             case "Sprite":
-                if (_timers[3] < highestScore)
+                if (_timers[3] < highestScore || highestScore == 0)
                 {
                     Leaderboards.instance.MashingSaveScore(_timers[3]);
                 }
@@ -80,6 +83,7 @@ public class MashingScore : MonoBehaviour
 
     void StartTimer(string name)
     {
+        Debug.Log("Timer Started for " + name);
         switch (name)
         {
             case "Coca":
