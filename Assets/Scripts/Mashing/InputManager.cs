@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         GamepadCount = InputSystem.devices.OfType<Gamepad>().Count();
-        Debug.Log("GamepadCount: " + GamepadCount);
+        //Debug.Log("GamepadCount: " + GamepadCount);
         if (GamepadCount > 0)
         {
             OnGamepadConnected?.Invoke(GamepadCount);

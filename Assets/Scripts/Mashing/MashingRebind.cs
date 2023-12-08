@@ -45,7 +45,7 @@ public class MashingRebind : MonoBehaviour
     public void RebindGamepad(InputActionReference _ref)
     {
         InputAction _action = _ref.action;
-        Debug.Log(_ref);
+        //Debug.Log(_ref);
         OnRebind?.Invoke();
         _action.Disable();
         rebindingOperation = _ref.action.PerformInteractiveRebinding(0)
@@ -65,10 +65,10 @@ public class MashingRebind : MonoBehaviour
         _binding.overridePath = rebindingOperation.action.bindings[0].effectivePath;
         _action.ApplyBindingOverride(0, _binding);
 
-        Debug.Log(rebindingOperation.action.bindings[0].effectivePath);
+        //Debug.Log(rebindingOperation.action.bindings[0].effectivePath);
         _action.Enable();
         rebindingOperation.Dispose();
-        Debug.Log(InputControlPath.ToHumanReadableString(_action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice));
+        //Debug.Log(InputControlPath.ToHumanReadableString(_action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice));
         UIRebind.SetActive(false);
     }
 

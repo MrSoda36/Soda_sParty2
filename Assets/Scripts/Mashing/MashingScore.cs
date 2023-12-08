@@ -47,7 +47,7 @@ public class MashingScore : MonoBehaviour
     void OnEnd(GameObject _go)
     {
         _finished = true;
-        Debug.Log(_timers.Min());
+        //Debug.Log(_timers.Min());
         float highestScore = Leaderboards.instance.MashingLoadScore();
 
         switch (_go.name)
@@ -85,7 +85,7 @@ public class MashingScore : MonoBehaviour
     //Starts the timer for the player
     void StartTimer(string name)
     {
-        Debug.Log("Timer Started for " + name);
+        //Debug.Log("Timer Started for " + name);
         switch (name)
         {
             case "Coca":
