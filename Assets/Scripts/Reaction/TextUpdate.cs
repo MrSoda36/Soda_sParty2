@@ -50,7 +50,6 @@ public class TextUpdate : MonoBehaviour
         selectedPlayers.OnNumberOfPlayersChanged += SelectPlayers;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         menuButton.SetActive(false);
@@ -88,7 +87,6 @@ public class TextUpdate : MonoBehaviour
                 if (timeJ1 != 0 && timeJ2 != 0) {
                     playersTimes[0] = timeJ1;
                     playersTimes[1] = timeJ2;
-                    Debug.Log("Find Winner - 2 Players");
                     FindWinner();
                 }
             }
@@ -97,7 +95,6 @@ public class TextUpdate : MonoBehaviour
                     playersTimes[0] = timeJ1;
                     playersTimes[1] = timeJ2;
                     playersTimes[2] = timeJ3;
-                    Debug.Log("Find Winner - 3 Players");
                     FindWinner();
                 }
             }
@@ -107,7 +104,6 @@ public class TextUpdate : MonoBehaviour
                     playersTimes[1] = timeJ2;
                     playersTimes[2] = timeJ3;
                     playersTimes[3] = timeJ4;
-                    Debug.Log("Find Winner - 4 Players");
                     FindWinner();
                 }
             }

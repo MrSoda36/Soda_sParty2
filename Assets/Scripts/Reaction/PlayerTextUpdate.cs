@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerTextUpdate : MonoBehaviour
 {
-    public PlayerInput playerInput;
-    public TextUpdate textUpdate;
-    public TextMeshProUGUI playerText;
-    public int playerNum;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private TextUpdate textUpdate;
+    [SerializeField] private TextMeshProUGUI playerText;
+    [SerializeField] private int playerNum;
     bool isDone = false;
     float reactTime = 0.00f;
 
@@ -79,7 +79,6 @@ public class PlayerTextUpdate : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (textUpdate.isFinished) {

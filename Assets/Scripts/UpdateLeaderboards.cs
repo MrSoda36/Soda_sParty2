@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class UpdateLeaderboards : MonoBehaviour
 {
-    public TMP_Text mashingScoreText;
-    public TMP_Text reactionScoreText;
-    public TMP_Text memoryScoreText;
+    [SerializeField] private TMP_Text mashingScoreText;
+    [SerializeField] private TMP_Text reactionScoreText;
+    [SerializeField] private TMP_Text memoryScoreText;
 
     public void UpdateMashingScore() {
         mashingScoreText.text = "Best score of all time : \n" + Leaderboards.instance.MashingLoadScore().ToString("0.###");

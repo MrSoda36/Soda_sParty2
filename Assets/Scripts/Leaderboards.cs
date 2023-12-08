@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Leaderboards : MonoBehaviour
 {
-    //float mashingScore;
-    //float reactionScore;
-    //int memoryScore;
-
     public static Leaderboards instance;
 
     void Awake() {
