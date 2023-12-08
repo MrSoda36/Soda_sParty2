@@ -45,6 +45,7 @@ public class TextUpdate : MonoBehaviour
     [SerializeField] Material white;
 
     [SerializeField] GameObject menuButton;
+    [SerializeField] GameObject restartButton;
 
     private void Awake() {
         selectedPlayers.OnNumberOfPlayersChanged += SelectPlayers;
@@ -53,6 +54,7 @@ public class TextUpdate : MonoBehaviour
     void Start()
     {
         menuButton.SetActive(false);
+        restartButton.SetActive(false);
 
         playersTimes = new float[nbPlayers];
 
@@ -107,10 +109,6 @@ public class TextUpdate : MonoBehaviour
                     FindWinner();
                 }
             }
-            
-            
-
-            menuButton.SetActive(true);
 
         }
     }
@@ -177,15 +175,19 @@ public class TextUpdate : MonoBehaviour
             }
         }
 
+        // Save score in the leaderboard
         if(Leaderboards.instance != null) {
             if(Leaderboards.instance.ReactionLoadScore() == 0) {
                 Leaderboards.instance.ReactionSaveScore(100000);
             }
             Leaderboards.instance.ReactionSaveScore(Mathf.Min(Leaderboards.instance.ReactionLoadScore(), min));
         }
+
+        menuButton.SetActive(true);
+        restartButton.SetActive(true);
     }
 
-
+    // Update the text on the screen with the "Pepsi Bottle meme" text
     IEnumerator TextUpdaterPepsi(string[] tabText) {
                                         // A Pepsi bottle
         yield return new WaitForSeconds(2.0f);
@@ -203,6 +205,7 @@ public class TextUpdate : MonoBehaviour
         yield return null;
     }
 
+    // Update the text on the screen with the "Chucklenuts meme" text
     IEnumerator TextUpdaterChucklenuts(string[] tabText) {
                                         // Think fast
         yield return new WaitForSeconds(0.5f);
@@ -215,6 +218,8 @@ public class TextUpdate : MonoBehaviour
         isFinished = true;
         yield return null;
     }
+
+    // Update the text on the screen with a simple number countdown
     IEnumerator TextUpdaterNumber(string[] tabText) {
                                         // 5
         yield return new WaitForSeconds(0.5f);
