@@ -24,6 +24,8 @@ public class MashingRebind : MonoBehaviour
         _inputManager.OnGamepadConnected += UpdateGamepadRebindUI;
     }
 
+
+    //Rebind the keyboard
     public void RebindKeyboard(InputActionReference _ref)
     {
         InputAction _action = _ref.action;
@@ -38,6 +40,8 @@ public class MashingRebind : MonoBehaviour
             .Start();
     }
 
+
+    //Doesn't work But I don't know why, I tried to do the same thing as the keyboard 
     public void RebindGamepad(InputActionReference _ref)
     {
         InputAction _action = _ref.action;
@@ -54,7 +58,7 @@ public class MashingRebind : MonoBehaviour
             .Start();
     }
 
-
+    //Called when the rebinding is complete
     void RebindComplete(InputAction _action)
     {
         InputBinding _binding = _action.bindings[0];
@@ -68,6 +72,7 @@ public class MashingRebind : MonoBehaviour
         UIRebind.SetActive(false);
     }
 
+    //Display the UI to rebind the keys
     void DisplayStartRebind()
     {
         if (UIRebind.activeSelf)
@@ -80,6 +85,7 @@ public class MashingRebind : MonoBehaviour
         }
     }
 
+    //Update the UI to display the gamepad buttons
     public void UpdateGamepadRebindUI(int _gamepadCount)
     {
         if (0 < _gamepadCount && _gamepadCount < 4)

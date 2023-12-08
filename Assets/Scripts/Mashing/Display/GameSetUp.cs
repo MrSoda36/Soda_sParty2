@@ -25,6 +25,7 @@ public class GameSetUp : MonoBehaviour
     //Store the input manager reference
     [SerializeField] InputManager _inputManager;
 
+    //Set all the events used in the script
     private void Awake()
     {
         _playerNb.OnNumberOfPlayersChanged += DisplayBottle;
@@ -36,6 +37,7 @@ public class GameSetUp : MonoBehaviour
         _inputManager.OnGamepadConnected += ActivateGamepadPlayer;
     }
 
+    //Activate the bottles with the number of players choosed
     void DisplayBottle(int NbPlayer)
     {
         for (int i = 0; i < NbPlayer; i++)
@@ -43,6 +45,8 @@ public class GameSetUp : MonoBehaviour
             _bottles[i].SetActive(true);
         }
     }
+
+    //Set the split screen for the number of players choosed
     void DisplayCamera(int NbPlayer)
     {
         _UiCamera.gameObject.SetActive(false);
@@ -70,6 +74,7 @@ public class GameSetUp : MonoBehaviour
         }
     }
 
+    //Activate the players with the number of players choosed
     void ActivatePlayers(int NbPlayer)
     {
         _playerInputs.SetActive(true);
@@ -79,6 +84,7 @@ public class GameSetUp : MonoBehaviour
         }
     }
 
+    //Activate the gamepad players with the number of gamepad connected
     void ActivateGamepadPlayer(int NbGamepad)
     {
         switch (NbGamepad)
@@ -116,6 +122,8 @@ public class GameSetUp : MonoBehaviour
         }
     }
 
+
+    //Switch the action map of the players to the gamepad one when the game start
     void SwitchActionGamepadMap(int NbPlayer)
     {
         switch (_inputManager.GamepadCount)

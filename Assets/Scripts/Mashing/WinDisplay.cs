@@ -27,6 +27,7 @@ public class WinDisplay : MonoBehaviour
         ShakeScript.OnWinReached += StartWait;
     }
 
+    //Display the win canvas with the right background image and text depending on the victorious bottle
     void DisplayWin(GameObject _victoriousBottle)
     {
         if (_victoriousBottle.name == "Coca")
@@ -64,14 +65,16 @@ public class WinDisplay : MonoBehaviour
         ResetButtonImage.gameObject.GetComponent<Button>().Select();
     }
 
+    //Function for the event OnWinReached
     void StartWait(GameObject _victoriousBottle)
     {
         StartCoroutine(Wait(_victoriousBottle));
     }
 
+    //Coroutine to wait for 0.1 seconds before displaying the win canvas, else dotween breaks the game
     IEnumerator Wait(GameObject _victoriousBottle)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         DisplayWin(_victoriousBottle);
     }
 

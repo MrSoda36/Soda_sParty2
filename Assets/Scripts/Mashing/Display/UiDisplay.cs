@@ -26,7 +26,7 @@ public class UiDisplay : MonoBehaviour
     [Header("Input Manager")]
     [SerializeField] InputManager _inputManager;
 
-
+    //Set the event to use in the script
     private void Start()
     {
         _playerNb.OnNumberOfPlayersChanged += DisplayUI;
@@ -36,6 +36,8 @@ public class UiDisplay : MonoBehaviour
         UpdateGamePadText(InputSystem.devices.OfType<Gamepad>().Count());
     }
 
+
+    //Set the UI to the number of player
     void DisplayUI(int NbPlayer)
     {
         UiParentForNumberOfPlayer.SetActive(false);
@@ -51,6 +53,7 @@ public class UiDisplay : MonoBehaviour
         }
     }
 
+    //Display to the player the binding text
     void DisplayBindingText(int i)
     {
         CocaBindingText.text = "Press : " + InputControlPath.ToHumanReadableString(_playerInput.actions["FirstPlayer"].bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice)
@@ -66,6 +69,7 @@ public class UiDisplay : MonoBehaviour
             + " or " + InputControlPath.ToHumanReadableString(_playerInput.actions["FourthPlayerGamepad"].bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
     }
 
+    //Tells the player the number of gamepad connected
     public void UpdateGamePadText(int i)
     {
         if (i == 0)

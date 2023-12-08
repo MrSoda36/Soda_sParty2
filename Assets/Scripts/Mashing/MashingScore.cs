@@ -21,6 +21,8 @@ public class MashingScore : MonoBehaviour
         _shakeByInputSystem.OnStart += StartTimer;
         _shakeByInputSystem.OnWinReached += OnEnd;
     }
+
+    //Increments the timer for each player if they started to shake
     private void FixedUpdate()
     {
         if (_cocaStarted && !_finished)
@@ -41,6 +43,7 @@ public class MashingScore : MonoBehaviour
         }
     }
 
+    //Saves the score of the player if he has beaten the highest score
     void OnEnd(GameObject _go)
     {
         _finished = true;
@@ -78,6 +81,8 @@ public class MashingScore : MonoBehaviour
         }
     }
 
+
+    //Starts the timer for the player
     void StartTimer(string name)
     {
         Debug.Log("Timer Started for " + name);
