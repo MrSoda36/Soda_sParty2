@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -16,7 +13,7 @@ public class MemoryBehaviour : MonoBehaviour
 
     //Cards and sprites
     [SerializeField] private GameObject[] _cards;
-    [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private CardData[] _datas;
 
     //List of the card's buttons and images
     private Button[] _buttons;
@@ -86,7 +83,7 @@ public class MemoryBehaviour : MonoBehaviour
 
         for (int i = 0; i < _images.Length; i++)
         {
-            _images[i].sprite = _sprites[_valueTranslator[i]];
+            _images[i].sprite = _datas[_valueTranslator[i]].cardImage;
         }        
     }
 

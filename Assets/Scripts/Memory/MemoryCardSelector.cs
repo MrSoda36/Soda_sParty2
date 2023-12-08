@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +8,8 @@ public class MemoryCardSelector : MonoBehaviour
 
     [SerializeField] private MemoryInput _input;
     [SerializeField] private MemoryBehaviour _behaviour;
+
+    [SerializeField] private float _selectDelay = 0.4f;
 
     private int _selectedIndex;
     private bool _waitingForKey = false;
@@ -42,7 +43,7 @@ public class MemoryCardSelector : MonoBehaviour
                 buttonTab[index].image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
                 //Debug.Log(buttonTab[index]);
                 
-                yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(_selectDelay);
 
                 buttonTab[index].image.color = Color.white;
             }

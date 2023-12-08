@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class MemoryPlayers : MonoBehaviour
 {
+
+    [SerializeField] private int _playerNumber = 3;
     public int CurrentPlayer { get; private set; } = 0;
     private int[] _playerScore  = { 0, 0, 0, 0 };
 
-    private int _playerNumber = 3;
-
+    
     public void ChangePlayer()
     {
         Debug.Log($"Change Player To{CurrentPlayer}");
