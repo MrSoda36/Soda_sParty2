@@ -8,70 +8,82 @@ using UnityEngine.UI;
 
 public class MemoryBehaviour : MonoBehaviour
 {
-    public GameObject[] buttons;
-    public Image[] images;
-    public Sprite[] sprites;
+    //Other Scripts
+    [SerializeField] private MemoryUI _ui;
+    [SerializeField] private MemoryPlayers _player;
+    [SerializeField] private MemoryInput _input;
+    [SerializeField] private MemoryCardSelector _selector;
 
-    public GameObject playerPanel;
-    public TMP_Text playerText;
-    public TMP_Text continueText;
+    //Cards and sprites
+    [SerializeField] private GameObject[] _cards;
+    [SerializeField] private Sprite[] _sprites;
 
-    public TMP_Text cocaScoreText;
-    public TMP_Text pepsiScoreText;
+    //List of the card's buttons and images
+    private Button[] _buttons;
+    private Image[] _images;
 
-    public Button cocaWinButton;
-    public Button pepsiWinButton;
+    //Represent flipped cards
+    private int[] _pressValues = { -1, -1 };
+    private int[] _buttonPressed = { -1, -1 };
 
-    private int[] pressValues = { -1, -1 };
-    private int[] buttonPressed = { -1, -1 };
+    private int _currentCardIndex = 0;
 
-    //Uses the buttonValue given by the order of the button to find its hidden value (needs to be initialized because of unoptomised code)
-    private int[] valueTranslator = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6 };
-    private int winNumber = 0;
+    //The cards' hidden value (needs to be initialized because of unoptimised code)
+    //Update : Code has been optimized
+    private int[] _valueTranslator;
+    private int _winNumber = 0;
 
-    private int currentPlayer = 1;
-    private int[] playerScore = { 0, 0 };
+    private bool _waitingForKey = false;
+    private bool _keyPressed = false;
+    private bool _flipEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        _input.OnKeyPressed += KeyListener;
+
+        ExtractCardInfo();
         StartCoroutine(InitText());
+        StartCoroutine(GamePlay());
     }
 
+    //Extract all wanted infos form the list of GameObject Cards. Also instanciates the valueTranslator
+    private void ExtractCardInfo()
+    {
+        _buttons = new Button[_cards.Length];
+        _images = new Image[_cards.Length];
+        _valueTranslator = new int[_cards.Length];
+
+        int tmpIndex = 0;
+
+        foreach (GameObject card in _cards)
+        {
+            _buttons[tmpIndex] = card.transform.GetChild(0).gameObject.GetComponent<Button>();     //Get the card's first child's gameObject
+            _images[tmpIndex] = card.GetComponent<Image>();
+            _valueTranslator[tmpIndex] = Mathf.RoundToInt(tmpIndex / 2);    //Goal : achieve a tab that looks like {0, 0, 1, 1, 2, 2, 3, 3, ...} and that is the length of the cards
+
+            tmpIndex++;
+        }
+
+        foreach (Button button in _buttons)                    //Prevent clicking on the cards
+        {
+            button.GetComponent<Button>().interactable = false;
+        }
+    }
 
     private IEnumerator InitText()
     {
-        playerPanel.SetActive(true);   
-        playerText.SetText("Coca Joue");
-        playerText.color = new Color(159, 0, 0);
+        _ui.Initialize();
 
-        continueText.color = new Color(159, 0, 0);
+        yield return StartCoroutine(WaitForInput());
 
-        cocaScoreText.SetText("0");
-        pepsiScoreText.SetText("0");
-
-        cocaWinButton.gameObject.SetActive(false);
-        pepsiWinButton.gameObject.SetActive(false);
-
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-
-        GameStart();
-        playerPanel.SetActive(false);
+        ShuffleCards();
+        _ui.HidePanel();
 
         yield return null;
     }
 
-    public void GameStart()
-    {
-        ShuffleCards();
-
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            images[i].sprite = sprites[valueTranslator[i]];
-        }
-    }
-
-    private void ShuffleCards()
+    public void ShuffleCards()
     {
         int tmp = 0;
         int index1 = 0;
@@ -79,143 +91,142 @@ public class MemoryBehaviour : MonoBehaviour
 
         for (int i = 0; i < 50; i++)
         {
-            index1 = Random.Range(0, valueTranslator.Length);
-            index2 = Random.Range(0, valueTranslator.Length);
+            index1 = Random.Range(0, _valueTranslator.Length);
+            index2 = Random.Range(0, _valueTranslator.Length);
 
-            tmp = valueTranslator[index1];
-            valueTranslator[index1] = valueTranslator[index2];
-            valueTranslator[index2] = tmp;
+            tmp = _valueTranslator[index1];
+            _valueTranslator[index1] = _valueTranslator[index2];
+            _valueTranslator[index2] = tmp;
         }
+
+        for (int i = 0; i < _images.Length; i++)
+        {
+            _images[i].sprite = _sprites[_valueTranslator[i]];
+        }        
     }
 
-    public void ButtonClick(int buttonValue)
+    private IEnumerator GamePlay()
     {
-        buttons[buttonValue].gameObject.SetActive(false);
-        //Debug.Log(buttonValue);
 
-        if (buttonPressed[0] == -1)     //The player hasn't clicked on any card
+        while (!CheckWin())
         {
-            pressValues[0] = valueTranslator[buttonValue];
-            buttonPressed[0] = buttonValue;
+            //Debug.Log("FlipCard");
+            _selector.StartSelection(_buttons);
+
+            yield return new WaitUntil(() => _flipEnded);
+
+            _flipEnded = false;
         }
-        else                            //The player clicked on a card -> Checks for a pair
+
+        _ui.VictoryScreen(_player.PlayerWinner());
+        yield return null;
+    }
+
+
+    public void FlipCard(int buttonValue)
+    {
+        _buttons[buttonValue].gameObject.SetActive(false);
+
+        if (_buttonPressed[0] == -1)     //The player hasn't clicked on any card yet
         {
-            pressValues[1] = valueTranslator[buttonValue];
-            buttonPressed[1] = buttonValue;
+            _pressValues[0] = _valueTranslator[buttonValue];
+            _buttonPressed[0] = buttonValue;
+            _flipEnded = true;
+        }
+        else                            //The player already clicked on a card -> Checks for a pair
+        {
+            _pressValues[1] = _valueTranslator[buttonValue];
+            _buttonPressed[1] = buttonValue;
             CheckPair();
         }
     }
 
     public void CheckPair()
     {
-        if (pressValues[0] == pressValues[1])
+        if (_pressValues[0] == _pressValues[1])
         {
             Debug.Log("Pair");
 
-            winNumber += 1;
-            playerScore[currentPlayer - 1] += 1;
-
-            if (currentPlayer == 1)
-            {
-                cocaScoreText.SetText((playerScore[currentPlayer - 1]).ToString());
-            }
-            else
-            {
-                pepsiScoreText.SetText((playerScore[currentPlayer - 1]).ToString());
-            }
-
-            if (winNumber == valueTranslator.Length / 2)    //6 pairs to win
-            {
-                //SceneManager.LoadScene("Menu");
-                PlayerWinner();
-            }
+            _winNumber += 1;
+            _player.IncreaseScore();
+            _ui.SetScore(_player.CurrentPlayer, _player.GetCurrentPlayerScore()); 
         }
         else
         {
-            //Debug.Log("NotPair");
-            StartCoroutine(FlipDelay());
+            StartCoroutine(FlipDelay());                    //Flips back the cards
         }
 
-        buttonPressed[0] = -1;
-        buttonPressed[1] = -1;
+        _buttonPressed[0] = -1;
+        _buttonPressed[1] = -1;
     }
 
     public IEnumerator FlipDelay()
     {
-        int button1 = buttonPressed[0];
-        int button2 = buttonPressed[1];
+        Debug.Log("FlipDelayEnter");
+        int button1 = _buttonPressed[0];
+        int button2 = _buttonPressed[1];
 
-        foreach (GameObject button in buttons)
+        /*
+        foreach (Button button in _buttons)                    //Prevent clicking more cards while the previous 2 are flipping back
         {
             button.GetComponent<Button>().interactable = false;
         }
+        */
 
         yield return new WaitForSeconds((float)0.5);
 
-        buttons[button1].gameObject.SetActive(true);
-        buttons[button2].gameObject.SetActive(true);
+        _buttons[button1].gameObject.SetActive(true);
+        _buttons[button2].gameObject.SetActive(true);
 
-        foreach (GameObject button in buttons)
+        /*
+        foreach (Button button in _buttons)
         {
             button.GetComponent<Button>().interactable = true;
         }
+        */
 
-        StartCoroutine(ChangePlayer());
+        //Debug.Log("FlipDelayEnd");
+        StartCoroutine(TurnEnd());
     }
 
-    private IEnumerator ChangePlayer()
+    private IEnumerator TurnEnd()
     {
-        playerPanel.SetActive(true);
+        //Debug.Log("TurnEndEnter");
+        _player.ChangePlayer();
 
-        if (currentPlayer == 1)
-        {
-            this.currentPlayer = 2;
+        _ui.ChangePlayerScreen(_player.CurrentPlayer);
 
-            playerText.SetText("Pepsi joue");
-            playerText.color = new Color(0, 0, 159);
+        yield return StartCoroutine(WaitForInput());
 
-            continueText.color = new Color(0, 0, 159);
-        }
-        else
-        {
-            this.currentPlayer = 1;
 
-            playerText.SetText("Coca joue");
-            playerText.color = new Color(159, 0, 0);
-
-            continueText.color = new Color(159, 0, 0);
-        }
-
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-
-        playerPanel.SetActive(false);
-
+        _ui.HidePanel();
+        _flipEnded = true;
+        //Debug.Log("TurnEndEnd");
         yield return null;
     }
 
-    private void PlayerWinner()
+    
+    private IEnumerator WaitForInput()
     {
-        playerPanel.SetActive(true);
-        continueText.gameObject.SetActive(false);
+        _waitingForKey = true;
 
-        if (playerScore[0] > playerScore[1])
+        yield return new WaitUntil(() => _keyPressed) ;
+
+        _keyPressed = false;
+        _waitingForKey = false;
+    }
+
+    private void KeyListener()
+    {
+        if (_waitingForKey)
         {
-            Debug.Log("Coca à gagné");
-
-            playerText.SetText("Coca à gagné !");
-            playerText.color = new Color(159, 0, 0);
-
-            cocaWinButton.gameObject.SetActive(true);
+            _keyPressed = true;
         }
-        else
-        {
-            Debug.Log("Pepsi à gagné");
+    }
+    
 
-            playerText.SetText("Pepsi à gagné !");
-            playerText.color = new Color(0, 0, 159);
-
-            pepsiWinButton.gameObject.SetActive(true);
-        }
-        //Il y a un nombre impair de paires, empêchant une égalité
+    private bool CheckWin()
+    {
+        return (_winNumber == _valueTranslator.Length / 2);
     }
 }
