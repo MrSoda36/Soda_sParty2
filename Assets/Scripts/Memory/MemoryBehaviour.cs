@@ -26,8 +26,6 @@ public class MemoryBehaviour : MonoBehaviour
     private int[] _pressValues = { -1, -1 };
     private int[] _buttonPressed = { -1, -1 };
 
-    private int _currentCardIndex = 0;
-
     //The cards' hidden value (needs to be initialized because of unoptimised code)
     //Update : Code has been optimized
     private int[] _valueTranslator;
@@ -41,14 +39,10 @@ public class MemoryBehaviour : MonoBehaviour
     void Start()
     {
         _input.OnKeyPressed += KeyListener;
-
-        ExtractCardInfo();
-        StartCoroutine(InitText());
-        StartCoroutine(GamePlay());
     }
 
     //Extract all wanted infos form the list of GameObject Cards. Also instanciates the valueTranslator
-    private void ExtractCardInfo()
+    public void ExtractCardInfo()
     {
         _buttons = new Button[_cards.Length];
         _images = new Image[_cards.Length];
@@ -69,19 +63,10 @@ public class MemoryBehaviour : MonoBehaviour
         {
             button.GetComponent<Button>().interactable = false;
         }
-    }
-
-    private IEnumerator InitText()
-    {
-        _ui.Initialize();
-
-        yield return StartCoroutine(WaitForInput());
 
         ShuffleCards();
-        _ui.HidePanel();
-
-        yield return null;
     }
+
 
     public void ShuffleCards()
     {
@@ -105,7 +90,8 @@ public class MemoryBehaviour : MonoBehaviour
         }        
     }
 
-    private IEnumerator GamePlay()
+    //The main Gameplay Loop
+    public IEnumerator GamePlay()
     {
 
         while (!CheckWin())
@@ -114,7 +100,6 @@ public class MemoryBehaviour : MonoBehaviour
             _selector.StartSelection(_buttons);
 
             yield return new WaitUntil(() => _flipEnded);
-
             _flipEnded = false;
         }
 
@@ -131,7 +116,7 @@ public class MemoryBehaviour : MonoBehaviour
         {
             _pressValues[0] = _valueTranslator[buttonValue];
             _buttonPressed[0] = buttonValue;
-            _flipEnded = true;
+            NextTurn();
         }
         else                            //The player already clicked on a card -> Checks for a pair
         {
@@ -149,7 +134,9 @@ public class MemoryBehaviour : MonoBehaviour
 
             _winNumber += 1;
             _player.IncreaseScore();
-            _ui.SetScore(_player.CurrentPlayer, _player.GetCurrentPlayerScore()); 
+            _ui.SetScore(_player.CurrentPlayer, _player.GetCurrentPlayerScore());
+
+            NextTurn();
         }
         else
         {
@@ -195,14 +182,17 @@ public class MemoryBehaviour : MonoBehaviour
         _player.ChangePlayer();
 
         _ui.ChangePlayerScreen(_player.CurrentPlayer);
-
         yield return StartCoroutine(WaitForInput());
-
-
         _ui.HidePanel();
-        _flipEnded = true;
+
+        NextTurn();
         //Debug.Log("TurnEndEnd");
         yield return null;
+    }
+
+    private void NextTurn()
+    {
+        _flipEnded = true;
     }
 
     
