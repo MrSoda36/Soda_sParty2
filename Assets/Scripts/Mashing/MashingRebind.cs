@@ -57,6 +57,10 @@ public class MashingRebind : MonoBehaviour
 
     void RebindComplete(InputAction _action)
     {
+        InputBinding _binding = _action.bindings[0];
+        _binding.overridePath = rebindingOperation.action.bindings[0].effectivePath;
+        _action.ApplyBindingOverride(0, _binding);
+
         Debug.Log(rebindingOperation.action.bindings[0].effectivePath);
         _action.Enable();
         rebindingOperation.Dispose();
