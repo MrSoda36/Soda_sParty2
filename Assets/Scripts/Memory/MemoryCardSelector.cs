@@ -10,7 +10,6 @@ public class MemoryCardSelector : MonoBehaviour
     [SerializeField] private float _selectDelay = 0.4f;
 
     private bool _hasChosen;
-    //private int _selectedIndex;
     private bool _waitingForKey = false;
 
     // Start is called before the first frame update
@@ -26,15 +25,9 @@ public class MemoryCardSelector : MonoBehaviour
         _waitingForKey = true;
 
         StartCoroutine(CardSelection(buttonTab));
-
-        //return _selectedIndex;
     }
 
-    /// <summary>
-    /// Goes through each non flipped card for the player to select
-    /// </summary>
-    /// <param name="buttonTab"></param>
-    /// <returns></returns>
+    //Goes through each non flipped card for the player to select
     private IEnumerator CardSelection(Button[] buttonTab)
     {
         int index = 0;

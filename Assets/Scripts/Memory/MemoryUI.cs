@@ -32,6 +32,7 @@ public class MemoryUI : MonoBehaviour
         _input.OnKeyPressed += KeyListener;
     }
 
+    //Sets and hides the text and panels
     public void Initialize(int playerNumber)
     {
         _playerText.SetText("Coca Joue");

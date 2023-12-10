@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,9 +6,6 @@ public class MemoryLauncher : MonoBehaviour
     [SerializeField] private MemoryBehaviour _behaviour;
     [SerializeField] private MemoryUI _ui;
     [SerializeField] private MemoryPlayers _players;
-
-    private bool _waitingForKey = false;
-    private bool _keyPressed = false;
 
     // Start is called before the first frame update
     void Start()

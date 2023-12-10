@@ -31,12 +31,6 @@ public class MemoryBehaviour : MonoBehaviour
     
     private bool _flipEnded = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     //Extract all wanted infos form the list of GameObject Cards. Also instanciates the valueTranslator
     public void ExtractCardInfo()
     {
@@ -66,9 +60,9 @@ public class MemoryBehaviour : MonoBehaviour
     //Swaps the cards order around, then assign each card its image
     public void ShuffleCards()
     {
-        int tmp = 0;
-        int index1 = 0;
-        int index2 = 0;
+        int tmp;
+        int index1;
+        int index2;
 
         for (int i = 0; i < 50; i++)
         {
@@ -161,6 +155,7 @@ public class MemoryBehaviour : MonoBehaviour
         StartCoroutine(TurnEnd());
     }
 
+    //Ends the turn and wait for the next player  before starting the next flip 
     private IEnumerator TurnEnd()
     {
         _player.ChangePlayer();
