@@ -7,6 +7,10 @@ public class MemoryPlayers : MonoBehaviour
     public int CurrentPlayer { get; private set; } = 0;
     private int[] _playerScore  = { 0, 0, 0, 0 };
 
+    public void SetPlayerNumber(int num)
+    {
+        _playerNumber = num;
+    }
     
     public void ChangePlayer()
     {

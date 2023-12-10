@@ -4,14 +4,13 @@ using UnityEngine.UI;
 
 public class MemoryCardSelector : MonoBehaviour
 {
-    public bool HasChosen { get; private set; }
-
     [SerializeField] private MemoryInput _input;
     [SerializeField] private MemoryBehaviour _behaviour;
 
     [SerializeField] private float _selectDelay = 0.4f;
 
-    private int _selectedIndex;
+    private bool _hasChosen;
+    //private int _selectedIndex;
     private bool _waitingForKey = false;
 
     // Start is called before the first frame update
@@ -21,22 +20,26 @@ public class MemoryCardSelector : MonoBehaviour
     }
 
 
-    public int StartSelection(Button[] buttonTab)
+    public void StartSelection(Button[] buttonTab)
     {
-        HasChosen = false;
+        _hasChosen = false;
         _waitingForKey = true;
 
         StartCoroutine(CardSelection(buttonTab));
 
-        return _selectedIndex;
+        //return _selectedIndex;
     }
 
-    //Goes through each non flipped card for the player to select
+    /// <summary>
+    /// Goes through each non flipped card for the player to select
+    /// </summary>
+    /// <param name="buttonTab"></param>
+    /// <returns></returns>
     private IEnumerator CardSelection(Button[] buttonTab)
     {
         int index = 0;
 
-        while (!HasChosen)
+        while (!_hasChosen)
         {
             if (buttonTab[index].gameObject.activeSelf)
             {
@@ -63,7 +66,7 @@ public class MemoryCardSelector : MonoBehaviour
     {
         if (_waitingForKey)
         {
-            HasChosen = true;
+            _hasChosen = true;
             _waitingForKey = false;
         }
     }
