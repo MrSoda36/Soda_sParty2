@@ -92,6 +92,8 @@ public class MemoryBehaviour : MonoBehaviour
             _flipEnded = false;
         }
 
+        //The game's end : Someone Won
+        gameObject.GetComponent<AudioSource>().Play();
         _ui.VictoryScreen(_player.PlayerWinner());
         yield return null;
     }

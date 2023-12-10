@@ -44,6 +44,11 @@ public class MemoryPlayers : MonoBehaviour
             }
         }
 
+        if (highestScore > Leaderboards.instance.MemoryLoadScore())     //Leaderboard highest ever score
+        {
+            Leaderboards.instance.MemorySaveScore(highestScore);
+        }
+        
         int[] winners = { -1, -1, -1, -1 };
         int winnersIndex = 0;
 
@@ -55,6 +60,8 @@ public class MemoryPlayers : MonoBehaviour
                 winnersIndex++;
             }
         }
+
+        
 
         return winners;
     }
