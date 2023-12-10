@@ -2,8 +2,6 @@ using TMPro;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using UnityEngine.Windows;
 
 public class MemoryUI : MonoBehaviour
 {
