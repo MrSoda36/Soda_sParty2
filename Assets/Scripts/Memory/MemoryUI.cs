@@ -15,6 +15,7 @@ public class MemoryUI : MonoBehaviour
 
     [Header("Texts")]
     [SerializeField] private TMP_Text _playerText;
+    [SerializeField] private TMP_Text _continueText;
 
     [SerializeField] private TMP_Text _cocaScoreText;
     [SerializeField] private TMP_Text _pepsiScoreText;
@@ -39,6 +40,7 @@ public class MemoryUI : MonoBehaviour
         _playerText.color = new Color(159, 0, 0);
 
         _winButton.gameObject.SetActive(false);
+        _continueText.gameObject.SetActive(true);
 
         _cocaScoreText.SetText("0");
         _pepsiScoreText.SetText("0");
@@ -195,6 +197,7 @@ public class MemoryUI : MonoBehaviour
 
         _playerPanel.SetActive(true);
         _winButton.gameObject.SetActive(true);
+        _continueText.gameObject.SetActive(false);
     }
 
     //Waits until the Key is pressed when called

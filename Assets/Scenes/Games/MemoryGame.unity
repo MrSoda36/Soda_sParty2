@@ -4461,6 +4461,7 @@ MonoBehaviour:
   _playerPanel: {fileID: 1476546341}
   _initPanel: {fileID: 1223410636}
   _playerText: {fileID: 776264742}
+  _continueText: {fileID: 1319838092}
   _cocaScoreText: {fileID: 1661971215}
   _pepsiScoreText: {fileID: 433286867}
   _fantaScoreText: {fileID: 1779558422}
