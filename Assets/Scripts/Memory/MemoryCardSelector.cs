@@ -1,16 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MemoryCardSelector : MonoBehaviour
 {
-    public bool HasChosen { get; private set; }
-
     [SerializeField] private MemoryInput _input;
     [SerializeField] private MemoryBehaviour _behaviour;
 
-    private int _selectedIndex;
+    [SerializeField] private float _selectDelay = 0.4f;
+
+    private bool _hasChosen;
     private bool _waitingForKey = false;
 
     // Start is called before the first frame update
@@ -20,14 +19,12 @@ public class MemoryCardSelector : MonoBehaviour
     }
 
 
-    public int StartSelection(Button[] buttonTab)
+    public void StartSelection(Button[] buttonTab)
     {
-        HasChosen = false;
+        _hasChosen = false;
         _waitingForKey = true;
 
         StartCoroutine(CardSelection(buttonTab));
-
-        return _selectedIndex;
     }
 
     //Goes through each non flipped card for the player to select
@@ -35,14 +32,14 @@ public class MemoryCardSelector : MonoBehaviour
     {
         int index = 0;
 
-        while (!HasChosen)
+        while (!_hasChosen)
         {
             if (buttonTab[index].gameObject.activeSelf)
             {
                 buttonTab[index].image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
                 //Debug.Log(buttonTab[index]);
                 
-                yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(_selectDelay);
 
                 buttonTab[index].image.color = Color.white;
             }
@@ -62,7 +59,7 @@ public class MemoryCardSelector : MonoBehaviour
     {
         if (_waitingForKey)
         {
-            HasChosen = true;
+            _hasChosen = true;
             _waitingForKey = false;
         }
     }

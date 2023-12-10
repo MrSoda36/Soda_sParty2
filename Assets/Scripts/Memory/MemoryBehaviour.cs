@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -16,7 +13,7 @@ public class MemoryBehaviour : MonoBehaviour
 
     //Cards and sprites
     [SerializeField] private GameObject[] _cards;
-    [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private CardData[] _datas;
 
     //List of the card's buttons and images
     private Button[] _buttons;
@@ -31,15 +28,8 @@ public class MemoryBehaviour : MonoBehaviour
     private int[] _valueTranslator;
     private int _winNumber = 0;
 
-    private bool _waitingForKey = false;
-    private bool _keyPressed = false;
+    
     private bool _flipEnded = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _input.OnKeyPressed += KeyListener;
-    }
 
     //Extract all wanted infos form the list of GameObject Cards. Also instanciates the valueTranslator
     public void ExtractCardInfo()
@@ -67,12 +57,12 @@ public class MemoryBehaviour : MonoBehaviour
         ShuffleCards();
     }
 
-
+    //Swaps the cards order around, then assign each card its image
     public void ShuffleCards()
     {
-        int tmp = 0;
-        int index1 = 0;
-        int index2 = 0;
+        int tmp;
+        int index1;
+        int index2;
 
         for (int i = 0; i < 50; i++)
         {
@@ -86,7 +76,7 @@ public class MemoryBehaviour : MonoBehaviour
 
         for (int i = 0; i < _images.Length; i++)
         {
-            _images[i].sprite = _sprites[_valueTranslator[i]];
+            _images[i].sprite = _datas[_valueTranslator[i]].cardImage;
         }        
     }
 
@@ -96,10 +86,9 @@ public class MemoryBehaviour : MonoBehaviour
 
         while (!CheckWin())
         {
-            //Debug.Log("FlipCard");
             _selector.StartSelection(_buttons);
 
-            yield return new WaitUntil(() => _flipEnded);
+            yield return new WaitUntil(() => _flipEnded);   //Waits for the turn to end
             _flipEnded = false;
         }
 
@@ -107,7 +96,9 @@ public class MemoryBehaviour : MonoBehaviour
         yield return null;
     }
 
+    
 
+    //Flips a card and record it. Calls CheckPair() when 2 cards are flipped
     public void FlipCard(int buttonValue)
     {
         _buttons[buttonValue].gameObject.SetActive(false);
@@ -116,7 +107,7 @@ public class MemoryBehaviour : MonoBehaviour
         {
             _pressValues[0] = _valueTranslator[buttonValue];
             _buttonPressed[0] = buttonValue;
-            NextTurn();
+            NextFlip();
         }
         else                            //The player already clicked on a card -> Checks for a pair
         {
@@ -126,7 +117,8 @@ public class MemoryBehaviour : MonoBehaviour
         }
     }
 
-    public void CheckPair()
+    //Compares the 2 card that have been recorded by FlipCard. Increases the current player's score if they're the same, calls FlipBack if they aren't
+    private void CheckPair()
     {
         if (_pressValues[0] == _pressValues[1])
         {
@@ -136,85 +128,55 @@ public class MemoryBehaviour : MonoBehaviour
             _player.IncreaseScore();
             _ui.SetScore(_player.CurrentPlayer, _player.GetCurrentPlayerScore());
 
-            NextTurn();
+            NextFlip();
         }
         else
         {
-            StartCoroutine(FlipDelay());                    //Flips back the cards
+            StartCoroutine(FlipBack());                    //Flips back the cards
         }
 
         _buttonPressed[0] = -1;
         _buttonPressed[1] = -1;
     }
 
-    public IEnumerator FlipDelay()
+    //Flips back recorded cards after a short delay
+    private IEnumerator FlipBack()
     {
         Debug.Log("FlipDelayEnter");
         int button1 = _buttonPressed[0];
         int button2 = _buttonPressed[1];
 
-        /*
-        foreach (Button button in _buttons)                    //Prevent clicking more cards while the previous 2 are flipping back
-        {
-            button.GetComponent<Button>().interactable = false;
-        }
-        */
-
-        yield return new WaitForSeconds((float)0.5);
+        yield return new WaitForSeconds(0.5f);
 
         _buttons[button1].gameObject.SetActive(true);
         _buttons[button2].gameObject.SetActive(true);
 
-        /*
-        foreach (Button button in _buttons)
-        {
-            button.GetComponent<Button>().interactable = true;
-        }
-        */
 
-        //Debug.Log("FlipDelayEnd");
         StartCoroutine(TurnEnd());
     }
 
+    //Ends the turn and wait for the next player  before starting the next flip 
     private IEnumerator TurnEnd()
     {
-        //Debug.Log("TurnEndEnter");
         _player.ChangePlayer();
 
-        _ui.ChangePlayerScreen(_player.CurrentPlayer);
-        yield return StartCoroutine(WaitForInput());
-        _ui.HidePanel();
+        yield return StartCoroutine(_ui.DisplayPlayerScreen(_player.CurrentPlayer));
 
-        NextTurn();
-        //Debug.Log("TurnEndEnd");
+        NextFlip();
+
         yield return null;
     }
 
-    private void NextTurn()
+
+    //Starts another Flip
+    private void NextFlip()
     {
         _flipEnded = true;
     }
 
     
-    private IEnumerator WaitForInput()
-    {
-        _waitingForKey = true;
-
-        yield return new WaitUntil(() => _keyPressed) ;
-
-        _keyPressed = false;
-        _waitingForKey = false;
-    }
-
-    private void KeyListener()
-    {
-        if (_waitingForKey)
-        {
-            _keyPressed = true;
-        }
-    }
     
-
+    //Returns true if all cards have been flipped
     private bool CheckWin()
     {
         return (_winNumber == _valueTranslator.Length / 2);

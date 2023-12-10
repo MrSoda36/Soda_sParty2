@@ -1,37 +1,79 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.Windows;
 
 public class MemoryUI : MonoBehaviour
 {
+    [SerializeField] private MemoryInput _input;
+
+    [Header("Panels")]
     [SerializeField] private GameObject _playerPanel;
+    [SerializeField] private GameObject _initPanel;
+
+    [Header("Texts")]
     [SerializeField] private TMP_Text _playerText;
-    [SerializeField] private TMP_Text _continueText;
 
     [SerializeField] private TMP_Text _cocaScoreText;
     [SerializeField] private TMP_Text _pepsiScoreText;
     [SerializeField] private TMP_Text _fantaScoreText;
     [SerializeField] private TMP_Text _spriteScoreText;
 
+    [Header("Button")]
     [SerializeField] private Button _winButton;
-    //[SerializeField] private Button _pepsiWinButton;
 
-    public void Initialize()
+    private bool _waitingForKey = false;
+    private bool _keyPressed = false;
+
+    private void Start()
     {
-        _playerPanel.SetActive(true);
+        _input.OnKeyPressed += KeyListener;
+    }
+
+    //Sets and hides the text and panels
+    public void Initialize(int playerNumber)
+    {
         _playerText.SetText("Coca Joue");
         _playerText.color = new Color(159, 0, 0);
+
+        _winButton.gameObject.SetActive(false);
 
         _cocaScoreText.SetText("0");
         _pepsiScoreText.SetText("0");
         _fantaScoreText.SetText("0");
         _spriteScoreText.SetText("0");
 
-        _winButton.gameObject.SetActive(false);
-        //_cocaWinButton.gameObject.SetActive(false);
-        //_pepsiWinButton.gameObject.SetActive(false);
+        if (playerNumber < 3)
+        {
+            _fantaScoreText.gameObject.SetActive(false);
+        }
+        if (playerNumber < 4)
+        {
+            _spriteScoreText.gameObject.SetActive(false);
+        }
+        
+    }
+
+    public void ShowPlayerPanel()
+    {
+        _playerPanel.SetActive(true);
+    }
+
+    public void HidePlayerPanel()
+    {
+        _playerPanel.SetActive(false);
+    }
+
+    public void ShowInitPanel()
+    {
+        _initPanel.SetActive(true);
+    }
+
+    public void HideInitPanel()
+    {
+        _initPanel.SetActive(false);
     }
 
     public void SetScore(int currentPlayer, int newScore)
@@ -56,9 +98,17 @@ public class MemoryUI : MonoBehaviour
         }
     }
 
+    public IEnumerator DisplayPlayerScreen(int currentPlayer)
+    {
+        ChangePlayerScreen(currentPlayer);
+        yield return StartCoroutine(WaitForInput());
+        HidePlayerPanel();
+
+        yield return null;
+    }
+
     public void ChangePlayerScreen(int currentPlayer)
     {
-        _playerPanel.SetActive(true);
 
         switch (currentPlayer)
         {
@@ -89,12 +139,11 @@ public class MemoryUI : MonoBehaviour
 
                 break;
         }
+
+
+        ShowPlayerPanel();
     }
 
-    public void HidePanel()
-    {
-        _playerPanel.SetActive(false);
-    }
      
     public void VictoryScreen(int[] winners)
     {
@@ -145,6 +194,26 @@ public class MemoryUI : MonoBehaviour
         _playerText.color = new Color(40, 40, 40);
 
         _playerPanel.SetActive(true);
-        _continueText.gameObject.SetActive(false);
+        _winButton.gameObject.SetActive(true);
+    }
+
+    //Waits until the Key is pressed when called
+    private IEnumerator WaitForInput()
+    {
+        _waitingForKey = true;
+
+        yield return new WaitUntil(() => _keyPressed);
+
+        _keyPressed = false;
+        _waitingForKey = false;
+    }
+
+    //Called when the Key is pressed
+    private void KeyListener()
+    {
+        if (_waitingForKey)
+        {
+            _keyPressed = true;
+        }
     }
 }

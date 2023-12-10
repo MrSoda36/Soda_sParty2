@@ -1,51 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MemoryLauncher : MonoBehaviour
 {
     [SerializeField] private MemoryBehaviour _behaviour;
     [SerializeField] private MemoryUI _ui;
-    [SerializeField] private MemoryInput _input;
-
-    private bool _waitingForKey = false;
-    private bool _keyPressed = false;
+    [SerializeField] private MemoryPlayers _players;
 
     // Start is called before the first frame update
     void Start()
     {
-        _input.OnKeyPressed += KeyListener;
-        StartCoroutine(InitGame());
+        _ui.ShowInitPanel();
+        _behaviour.ExtractCardInfo();
     }
 
-    private IEnumerator InitGame()
+    public void InitPlayers(int playerNumber)
     {
-        _behaviour.ExtractCardInfo();
-
-        _ui.Initialize();
-        yield return StartCoroutine(WaitForInput());
-        _ui.HidePanel();
+        _players.SetPlayerNumber(playerNumber);
+        _ui.HideInitPanel();
+        _ui.Initialize(playerNumber);
 
         StartCoroutine(_behaviour.GamePlay());
-
-        yield return null;
     }
 
-    private IEnumerator WaitForInput()
+    public void GoToMenu()
     {
-        _waitingForKey = true;
-
-        yield return new WaitUntil(() => _keyPressed);
-
-        _keyPressed = false;
-        _waitingForKey = false;
-    }
-
-    private void KeyListener()
-    {
-        if (_waitingForKey)
-        {
-            _keyPressed = true;
-        }
+        SceneManager.LoadScene("MainMenu");
     }
 }
